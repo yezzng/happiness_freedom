@@ -1,12 +1,12 @@
-svg.mapSVG {
+/* svg.mapSVG {
   margin-left: 5%;
   background-color: rgb(23, 52, 77);
-}
+} */
 
-#map {
+/* #map {
   max-width: 50%;
   position: absolute;
-}
+} */
 
 #mapText {
   position: absolute;
