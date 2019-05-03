@@ -34,21 +34,30 @@ const requestData = async () => {
     d['HumanFreedomScore'] !== NaN && 
     d['HumanFreedomScore'] > 0 && 
     d['HumanFreedomScore'].length !== 0);
-
+  var score=[];
     filtered.forEach( (d, i) => {
-      d['HappinessScore'] = Number(d['HappinessScore']);
+      score[i] = Number(d['HappinessScore']);
       d['HappinessRank'] = Number(d['HappinessRank']);
       d['HumanFreedomRank'] = Number(d['HumanFreedomRank']);
       d['HumanFreedomScore'] = Number(d['HumanFreedomScore']);
+
     })
 
     console.log(filtered);
+
+    var color=d3.scaleLinear()
+    .domain([1,10])
+    .range(['#CDDBF7', '#224499'])
+    .clamp(true)
+    .interpolate(d3.interpolateHcl);
+
 
     svg.selectAll("path").data(countries.features)
         .enter()
         .append("path")
         .attr("class", "country")
-        .attr("d", path);
+        .attr("d", path)
+        .style("fill", (d,i) => color(score[i]));
 
     //generating counts in order to make a color scale
     let countryCounts = {};
@@ -58,14 +67,15 @@ const requestData = async () => {
       idToCountry[row.id] = row.name;
     })
 
-    // making color scale
+   
+    
     const colorScale = d3.scaleQuantize()
-                      .domain( [0, 10] )
-                      .range( ['#CDDBF7', '#224499']);
+    .domain( [0, 10] )
+    .range( ['#00f9ff', '#0051ff']);
 
     // coloring in map with colors
     map.selectAll(".country")
-      .style("fill", d => colorScale(d.countries));
+      .style("fill", d => color(d.HumanFreedomScore));
 
     var linearScale = d3.scaleLinear()
         .domain([0, 100])
