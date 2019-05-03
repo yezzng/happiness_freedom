@@ -18,10 +18,10 @@ const requestData = async () => {
   //loading datasets
   const world = await d3.json("/world_110m.json");
   const happy = await d3.csv("data/2015happyFreedom.csv");
-
+  console.log( world );
   const countries = topojson.feature( world, world.objects.countries );
 
-console.log(world);
+
   const countriesMesh = topojson.mesh( world, world.objects.countries );
   var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
   var path = d3.geoPath().projection( projection );
@@ -37,13 +37,10 @@ console.log(world);
         .attr("class", "outline")
         .attr("d", path);
 
-
-  console.log(happy);
-
-
-
-
-
+  //making color scale
+  const colorScale = d3.scaleSequential()
+                        .domain( [0, 10] )
+                        .range( ['#CDDBF7', '#224499']);
 
 };
 requestData();
