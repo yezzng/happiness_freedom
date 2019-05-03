@@ -33,8 +33,6 @@ header {
 
 body {
   font-family: 'Avenir Next';
-
-
 }
 
 
@@ -42,9 +40,12 @@ body {
 /* footer */
 
 footer {
-  /* background-color: #F9FAF5; */
-  padding: 15px 0 15px 0;
-  font-family: monospace;
-  background-color: #224499;
-
+  padding: 10px 10px;
+  background-color:#FFFFFF;
+  color: #224499;
 }
+
+footer a {
+  color: #224499;
+}
+
