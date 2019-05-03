@@ -32,7 +32,7 @@ const requestData = async () => {
       d['HumanFreedomRank'] = Number(d['HumanFreedomRank']);
       d['HumanFreedomScore'] = Number(d['HumanFreedomScore']);
     })
-  
+
     console.log(happy);
 
     svg.selectAll("path").data(countries.features)
@@ -41,19 +41,35 @@ const requestData = async () => {
         .attr("class", "country")
         .attr("d", path);
 
-    //making color scale
-    // const colorScale = d3.scaleQuantize()
-    //                   .domain( [0, 10] )
-    //                   .range( ['#CDDBF7', '#224499']);
+    //generating counts in order to make a color scale
+    let countryCounts = {};
+    let idToCountry = {};
+    happy.forEach( row => {
+      countryCounts[row.name] = 0;
+      idToCountry[row.id] = row.name;
+    })
+
+    // making color scale
+    const colorScale = d3.scaleQuantize()
+                      .domain( [0, 10] )
+                      .range( ['#CDDBF7', '#224499']);
+
+    // coloring in map with colors
+    map.selectAll(".country")
+      .style("fill", d => colorScale(d.countries));
 
     var linearScale = d3.scaleLinear()
         .domain([0, 100])
         .range([0, 600]);
+<<<<<<< HEAD
     
     var colorScale = d3.scaleQuantile()
         .domain([0, 10])
         .range( ['#CDDBF7', '#224499']);
     
+=======
+
+>>>>>>> bf6624bc5529061f8f886dca6f0570baac068e84
     d3.select('#mapLegend')
         .selectAll('rect')
         .data(happy)
@@ -68,8 +84,7 @@ const requestData = async () => {
           return colorScale(d);
         });
 
-    // map.selectAll(".country")
-    //   .style("fill", d => colorScale(d.countries));
+
 
 
 
@@ -78,13 +93,6 @@ const requestData = async () => {
         .attr("class", "outline")
         .attr("d", path);
 
-    //generating counts
-    let countryCounts = {};
-    let idToCountry = {};
-    happy.forEach( row => {
-      countryCounts[row.name] = 0;
-      idToCountry[row.id] = row.name;
-    })
 
 
 
