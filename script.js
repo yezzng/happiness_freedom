@@ -17,14 +17,11 @@ const requestData = async () => {
 
     // check data
     console.log(happy);
-<<<<<<< HEAD
-    console.log(world);
-=======
+    //console.log(world);
 
     const countries = topojson.feature( world, world.objects.countries );
 
-    //console.log(world);
->>>>>>> a141c5f54d504038a57dfbe868a8e5ed18d52912
+
 
     // draw a world map
     const countries = topojson.feature( world, world.objects.countries );
@@ -32,7 +29,6 @@ const requestData = async () => {
     var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
     var path = d3.geoPath().projection( projection );
 
-<<<<<<< HEAD
     // clean up data
     happy.forEach( (d, i) => {
       d['HappinessScore'] = Number(d['HappinessScore']);
@@ -44,8 +40,6 @@ const requestData = async () => {
     console.log(happy);
 
     
-=======
->>>>>>> a141c5f54d504038a57dfbe868a8e5ed18d52912
 
     svg.selectAll("path").data(countries.features)
         .enter()
