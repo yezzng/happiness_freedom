@@ -2,11 +2,7 @@
 let svg = d3.select("#map");
 let width = svg.attr("width");
 let height = svg.attr("height");
-let margin = {
-    top: -30,
-    right: 20,
-    bottom: 30,
-    left: 20
+let margin = { top: 10, right: 20, bottom: 10, left: 20
 };
 const mapWidth = width - margin.left - margin.right;
 const mapHeight = height - margin.top - margin.bottom;
@@ -19,26 +15,67 @@ const requestData = async () => {
     const world = await d3.json("/data/world_110m.json");
     const happy = await d3.csv("/data/2015happyFreedom.csv");
 
+    // check data
     console.log(happy);
-
-    const countries = topojson.feature( world, world.objects.countries );
-
     console.log(world);
 
+    // draw a world map
+    const countries = topojson.feature( world, world.objects.countries );
     const countriesMesh = topojson.mesh( world, world.objects.countries );
     var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
     var path = d3.geoPath().projection( projection );
 
-    //making color scale
-    // const colorScale = d3.scaleSequential()
-    //                       .domain( [0, 10] )
-    //                       .range( ['#CDDBF7', '#224499']);
+    // clean up data
+    happy.forEach( (d, i) => {
+      d['HappinessScore'] = Number(d['HappinessScore']);
+      d['HappinessRank'] = Number(d['HappinessRank']);
+      d['HumanFreedomRank'] = Number(d['HumanFreedomRank']);
+      d['HumanFreedomScore'] = Number(d['HumanFreedomScore']);
+    })
+  
+    console.log(happy);
+
+    
 
     svg.selectAll("path").data(countries.features)
         .enter()
         .append("path")
         .attr("class", "country")
         .attr("d", path);
+
+    //making color scale
+    // const colorScale = d3.scaleQuantize()
+    //                   .domain( [0, 10] )
+    //                   .range( ['#CDDBF7', '#224499']);
+
+
+
+    var linearScale = d3.scaleLinear()
+        .domain([0, 100])
+        .range([0, 600]);
+    
+    var colorScale = d3.scaleQuantile()
+        .domain([0, 100])
+        .range( ['#CDDBF7', '#224499']);
+    
+    d3.select('#mapLegend')
+        .selectAll('rect')
+        .data(happy)
+        .enter()
+        .append('rect')
+        .attr('x', function(d) {
+          return linearScale(d);
+        })
+        .attr('width', 300)
+        .attr('height', 30)
+        .style('fill', function(d) {
+          return colorScale(d);
+        });
+
+    // map.selectAll(".country")
+    //   .style("fill", d => colorScale(d.countries));
+
+
 
     svg.append("path")
         .datum(countriesMesh)
@@ -79,7 +116,7 @@ const requestData = async () => {
 
 
         const countryName = country.attr('name');
-        tooltip.append('div')
+        tooltip.append("div")
           .attr("class", "tooltip-content")
           .text(countryName);
 
