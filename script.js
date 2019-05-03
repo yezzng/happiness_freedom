@@ -16,10 +16,8 @@ const requestData = async () => {
     const happy = await d3.csv("/data/2015happyFreedom.csv");
 
     // check data
-    console.log(happy);
-    //console.log(world);
-
-
+    // console.log(happy);
+    // console.log(world);
 
     // draw a world map
     const countries = topojson.feature( world, world.objects.countries );
@@ -37,8 +35,6 @@ const requestData = async () => {
   
     console.log(happy);
 
-    
-
     svg.selectAll("path").data(countries.features)
         .enter()
         .append("path")
@@ -49,8 +45,6 @@ const requestData = async () => {
     // const colorScale = d3.scaleQuantize()
     //                   .domain( [0, 10] )
     //                   .range( ['#CDDBF7', '#224499']);
-
-
 
     var linearScale = d3.scaleLinear()
         .domain([0, 100])
