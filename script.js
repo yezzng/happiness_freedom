@@ -15,18 +15,6 @@ const map = svg.append("g")
 
 const requestData = async () => {
 
-<<<<<<< HEAD
-  //loading datasets
-  const world = await d3.json("/world_110m.json");
-  const happy = await d3.csv("data/2015happyFreedom.csv");
-  console.log( world );
-  const countries = topojson.feature( world, world.objects.countries );
-
-
-  const countriesMesh = topojson.mesh( world, world.objects.countries );
-  var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
-  var path = d3.geoPath().projection( projection );
-=======
     //loading datasets
     const world = await d3.json("/world_110m.json");
     const happy = await d3.csv("data/2015happyFreedom.csv");
@@ -34,13 +22,17 @@ const requestData = async () => {
     console.log(happy);
 
     const countries = topojson.feature( world, world.objects.countries );
->>>>>>> 2be037cd6ce730d1a120105ad06da62e980b81aa
 
     console.log(world);
 
     const countriesMesh = topojson.mesh( world, world.objects.countries );
     var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
     var path = d3.geoPath().projection( projection );
+
+    //making color scale
+    const colorScale = d3.scaleSequential()
+                          .domain( [0, 10] )
+                          .range( ['#CDDBF7', '#224499']);
 
     svg.selectAll("path").data(countries.features)
         .enter()
@@ -53,17 +45,11 @@ const requestData = async () => {
         .attr("class", "outline")
         .attr("d", path);
 
-<<<<<<< HEAD
-  //making color scale
-  const colorScale = d3.scaleSequential()
-                        .domain( [0, 10] )
-                        .range( ['#CDDBF7', '#224499']);
-=======
     // create tooltip to show name of the country and data point
     var tooltip = d3.select("#mapContainer").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
-    
+
     // mouse on and off for tooltip
     svg.selectAll('path')
         .on("mousemove", mouseOnPlot)
@@ -90,8 +76,8 @@ const requestData = async () => {
         tooltip.append("div").attr("class", "tooltip-label").text(happy.Country);
         tooltip.append("div").attr("class", "tooltip-label").text("Happiness Score: " + happy.HappinessScore);
         tooltip.append("div").attr("class", "tooltip-label").text("Freedom Score: " + happy.HumanFreedomScore)
-        
-        
+
+
         const countryName = country.attr('name');
         tooltip.append('div')
           .attr("class", "tooltip-content")
@@ -106,7 +92,6 @@ const requestData = async () => {
 
 
 
->>>>>>> 2be037cd6ce730d1a120105ad06da62e980b81aa
 
 };
 requestData();
