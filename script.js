@@ -13,12 +13,12 @@ const map = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 const requestData = async () => {
-  const world = await d3.json("./world_110m.json");
+  const world = await d3.json("/world_110m.json");
 
   const countries = topojson.feature( world, world.objects.countries );
 
-console.log(countries);
-  const countriesMesh = topojson.mesh( world, world.objects.countires );
+console.log(world);
+  const countriesMesh = topojson.mesh( world, world.objects.countries );
   var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
   var path = d3.geoPath().projection( projection );
 
