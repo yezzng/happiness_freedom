@@ -69,8 +69,8 @@
             let free = freeScale(d['HumanFreedomScore']);
             let region = regionScale(d['Region']);
             let country=d['Country'];
-            let happyrank=d['HappinessRank'];
-            let freerank=d['HumanFreedomRank'];
+            let happyScore=d['HappinessScore'];
+            let freeScore=d['HumanFreedomScore'];
             // Draw
             let circle = scatter.append("circle")
                   .attr("cx", happy)
@@ -85,7 +85,7 @@
                       .duration(200)		
                       .style("opacity", .9);		
                       
-                      div1.html("Country: "+country+ "<br/>"+"Happiness Rank: "+happyrank+ "<br/>"+"Human Freedom Rank: "+freerank)	
+                      div1.html("Country: "+country+ "<br/>"+"Happiness Score: "+happyScore+ "<br/>"+"Human Freedom Score: "+freeScore)	
                       .style("left", (d3.event.pageX) + "px")		
                       .style("top", (d3.event.pageY - 28) + "px");})
                 .on("mouseout", function(d) {		
