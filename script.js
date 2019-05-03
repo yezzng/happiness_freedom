@@ -29,12 +29,6 @@ const requestData = async () => {
     var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
     var path = d3.geoPath().projection( projection );
 
-    //making color scale
-    const colorScale = d3.scaleQuantile()
-                          .domain( [0, 10] )
-                          .range( ['#CDDBF7', '#224499']);
-
-    map.selectAll(".country")
 
     svg.selectAll("path").data(countries.features)
         .enter()
@@ -46,6 +40,11 @@ const requestData = async () => {
         .datum(countriesMesh)
         .attr("class", "outline")
         .attr("d", path);
+
+    //making color scale
+    const colorScale = d3.scaleQuantile()
+                          .domain( [0, 10] )
+                          .range( ['#CDDBF7', '#224499']);
 
     // create tooltip to show name of the country and data point
     var tooltip = d3.select("#mapContainer").append("div")
