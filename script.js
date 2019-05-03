@@ -30,9 +30,9 @@ const requestData = async () => {
     var path = d3.geoPath().projection( projection );
 
     //making color scale
-    const colorScale = d3.scaleSequential()
-                          .domain( [0, 10] )
-                          .range( ['#CDDBF7', '#224499']);
+    // const colorScale = d3.scaleSequential()
+    //                       .domain( [0, 10] )
+    //                       .range( ['#CDDBF7', '#224499']);
 
     svg.selectAll("path").data(countries.features)
         .enter()
