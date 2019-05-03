@@ -61,15 +61,6 @@ const requestData = async () => {
     var linearScale = d3.scaleLinear()
         .domain([0, 100])
         .range([0, 600]);
-<<<<<<< HEAD
-    
-    var colorScale = d3.scaleQuantile()
-        .domain([0, 10])
-        .range( ['#CDDBF7', '#224499']);
-    
-=======
-
->>>>>>> bf6624bc5529061f8f886dca6f0570baac068e84
     d3.select('#mapLegend')
         .selectAll('rect')
         .data(happy)
