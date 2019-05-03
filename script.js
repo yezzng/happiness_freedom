@@ -2,7 +2,7 @@
 let svg = d3.select("#map");
 let width = svg.attr("width");
 let height = svg.attr("height");
-let margin = { top: 10, right: 20, bottom: 10, left: 20
+let margin = { top: 30, right: 20, bottom: 10, left: 20
 };
 const mapWidth = width - margin.left - margin.right;
 const mapHeight = height - margin.top - margin.bottom;
@@ -51,7 +51,7 @@ const requestData = async () => {
         .range([0, 600]);
     
     var colorScale = d3.scaleQuantile()
-        .domain([0, 100])
+        .domain([0, 10])
         .range( ['#CDDBF7', '#224499']);
     
     d3.select('#mapLegend')
@@ -108,7 +108,7 @@ const requestData = async () => {
     function mouseOnPlot() {
         // Move the tooltip
         const x = (event.pageX - (tooltipWidth / 2.0));
-        const y = (event.pageY - tooltipHeight + 20);
+        const y = (event.pageY - tooltipHeight - 20);
         tooltip.style("left", x + 'px');
         tooltip.style("top", y + 'px');
 

@@ -19,3 +19,40 @@
   color: white;
   width: 240px;
 } */
+
+
+/* header */
+
+header {
+  /* background-color: #F9FAF5; */
+  padding: 15px 15px 15px 15px;
+  font-family: monospace;
+  color:#C0EB6A;
+  background-color: #F4F6F0;
+}
+
+
+/* footer */
+
+footer {
+  /* background-color: #F9FAF5; */
+  padding: 15px 0 15px 0;
+  font-family: monospace;
+  color:#C0EB6A;
+  background-color: #F4F6F0;
+}
+
+
+/* tooltip */
+.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 4px;
+  width: 140px;
+  height: 60px;
+  font: 12px sans-serif;
+  background: honeydew;
+  border: 1px solid grey;
+  border-radius: 10px;
+  pointer-events: none;
+}
