@@ -25,14 +25,14 @@
 
 header {
   padding: 15px 15px 15px 15px;
-  font-family: monospace;
-  color:#C0EB6A;
-  background-color: #F4F6F0;
+  font-family: 'Avenir Next';
+  color:#224499;
+  background-color: none;
   font-size: 150%;
 }
 
 body {
-  font-family: monospace;
+  font-family: 'Avenir Next';
 
 
 }
@@ -45,6 +45,6 @@ footer {
   /* background-color: #F9FAF5; */
   padding: 15px 0 15px 0;
   font-family: monospace;
-  color:#C0EB6A;
-  background-color: #F4F6F0;
+  color: #224499;
+  background-color: none;
 }
