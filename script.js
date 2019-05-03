@@ -17,7 +17,7 @@ const requestData = async () => {
 
     //loading datasets
     const world = await d3.json("/world_110m.json");
-    const happy = await d3.csv("data/2015happyFreedom.csv");
+    const happy = await d3.csv("/data/2015happyFreedom.csv");
 
     console.log(happy);
 
