@@ -4,10 +4,35 @@
 <head>
   <meta charset="utf-8">
   <title>5100 Project 3</title>
-  <link rel="stylesheet" type="text/css" href="/css/all.css">
-
+  <link rel="stylesheet" type="text/css" href="./css/all.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="https://d3js.org/topojson.v2.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/all.css">
+  <style>
+		svg {
+			display: block;
+			margin: 0 auto;
+		}
+div.tooltip1 {	
+    position: absolute;			
+    text-align: center;			
+    width: auto;					
+    height: auto;					
+    padding: 2px;				
+    font: 12px sans-serif;		
+    background: burlywood;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;			
+}
+
+p {
+  color: white;
+  margin: 50px;
+}
+
+	</style>
 </head>
 
 
@@ -17,15 +42,18 @@
 
 
 <body>
-<br>
+
   <div id = "mapContainer">
 
-    <svg id="map" width="962" height="600"></svg>
-    <svg id="mapLegend" height="60" width="450"></svg>
+    <svg id = "map" width = "962" height = "600"> </svg>
 
-    <script type="text/javascript" src="/script.js"></script>
+    <svg id="scatterplot" height="500" width="500" style="background: #fff; margin-top:50px" >
 
-  </div>
+      </svg>
+      <div id="simpleLegend" class="legend"> </div>
+
+      <script type="text/javascript"  src="/script.js"></script>
+    <script type="text/javascript"  src="/script.1.js"></script>
 </body>
 
 
