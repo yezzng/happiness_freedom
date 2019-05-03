@@ -24,12 +24,19 @@
 /* header */
 
 header {
-  /* background-color: #F9FAF5; */
   padding: 15px 15px 15px 15px;
   font-family: monospace;
   color:#C0EB6A;
   background-color: #F4F6F0;
+  font-size: 150%;
 }
+
+body {
+  font-family: monospace;
+
+
+}
+
 
 
 /* footer */
