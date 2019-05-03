@@ -19,8 +19,6 @@ const requestData = async () => {
     console.log(happy);
     //console.log(world);
 
-    const countries = topojson.feature( world, world.objects.countries );
-
 
 
     // draw a world map
@@ -95,12 +93,7 @@ const requestData = async () => {
     })
 
     //making color scale
-    const colorScale = d3.scaleQuantile()
-                          .domain( [0, 10] )
-                          .range( ['#CDDBF7', '#224499']);
 
-    map.selectAll(".state")
-        .style( "fill", d => colorScale( countryCounts[ idToCountry[d.id] ] ) );
 
     // create tooltip to show name of the country and data point
     var tooltip = d3.select("#mapContainer").append("div")
