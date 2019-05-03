@@ -24,12 +24,19 @@
 /* header */
 
 header {
-  /* background-color: #F9FAF5; */
   padding: 15px 15px 15px 15px;
   font-family: 'Avenir Next';
   color:#224499;
   background-color: #F4F6F0;
+  font-size: 150%;
 }
+
+body {
+  font-family: monospace;
+
+
+}
+
 
 
 /* footer */
