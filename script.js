@@ -34,6 +34,8 @@ const requestData = async () => {
                           .domain( [0, 10] )
                           .range( ['#CDDBF7', '#224499']);
 
+    map.selectAll(".country")
+
     svg.selectAll("path").data(countries.features)
         .enter()
         .append("path")
