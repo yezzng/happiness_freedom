@@ -36,17 +36,19 @@ body {
 }
 
 h2 {
-  padding: 40px; 
+  padding: 40px;
 }
 
 /* footer */
 
 footer {
-  padding: 10px 10px;
+  padding: 100px;
   background-color:#FFFFFF;
   color: #224499;
+  line-height: 28px;
 }
 
 footer a {
   color: #224499;
+
 }
