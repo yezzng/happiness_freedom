@@ -92,7 +92,7 @@ const requestData = async () => {
       idToCountry[row.id] = row.name;
     })
 
-    //making color scale
+
 
 
     // create tooltip to show name of the country and data point
