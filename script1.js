@@ -32,13 +32,13 @@
     const happyMax = d3.max(data, d => d['HappinessScore']);
     const happyScale = d3.scaleLinear()
             .domain([1, 10])
-            .range([0, width]); 
+            .range([0, width2]); 
    
     const freeMin = d3.min(data, d => d['HumanFreedomScore']);
     const freeMax = d3.max(data, d => d['HumanFreedomScore']);
     const freeScale = d3.scaleLinear()
                     .domain([1, 10])
-                    .range([height,0]);
+                    .range([height2,0]);
     const regionScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     
