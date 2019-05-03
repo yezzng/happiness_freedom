@@ -46,6 +46,9 @@ const requestData = async () => {
                           .domain( [0, 10] )
                           .range( ['#CDDBF7', '#224499']);
 
+    map.selectAll(".state")
+        .style( "fill", d => colorScale())
+
     // create tooltip to show name of the country and data point
     var tooltip = d3.select("#mapContainer").append("div")
         .attr("class", "tooltip")
