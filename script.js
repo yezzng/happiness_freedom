@@ -16,7 +16,7 @@ const requestData = async () => {
     const happy = await d3.csv("/data/2015happyFreedom.csv");
 
     // check data
-    // console.log(happy);
+    console.log(happy);
     // console.log(world);
 
     // draw a world map
@@ -25,15 +25,24 @@ const requestData = async () => {
     var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
     var path = d3.geoPath().projection( projection );
 
+
+
     // clean up data
-    happy.forEach( (d, i) => {
+    var filtered = happy.filter(d => d['HumanFreedomRank'] !== NaN &&
+    d['HumanFreedomRank'] > 0 &&
+    d['HumanFreedomRank'].length !== 0 &&
+    d['HumanFreedomScore'] !== NaN && 
+    d['HumanFreedomScore'] > 0 && 
+    d['HumanFreedomScore'].length !== 0);
+
+    filtered.forEach( (d, i) => {
       d['HappinessScore'] = Number(d['HappinessScore']);
       d['HappinessRank'] = Number(d['HappinessRank']);
       d['HumanFreedomRank'] = Number(d['HumanFreedomRank']);
       d['HumanFreedomScore'] = Number(d['HumanFreedomScore']);
     })
 
-    console.log(happy);
+    console.log(filtered);
 
     svg.selectAll("path").data(countries.features)
         .enter()
@@ -44,7 +53,7 @@ const requestData = async () => {
     //generating counts in order to make a color scale
     let countryCounts = {};
     let idToCountry = {};
-    happy.forEach( row => {
+    filtered.forEach( row => {
       countryCounts[row.name] = 0;
       idToCountry[row.id] = row.name;
     })
@@ -63,7 +72,7 @@ const requestData = async () => {
         .range([0, 600]);
     d3.select('#mapLegend')
         .selectAll('rect')
-        .data(happy)
+        .data(filtered)
         .enter()
         .append('rect')
         .attr('x', function(d) {
@@ -116,9 +125,9 @@ const requestData = async () => {
 
         // Give tooltip a label
         let country = d3.select(this);
-        tooltip.append("div").attr("class", "tooltip-label").text(happy.Country);
-        tooltip.append("div").attr("class", "tooltip-label").text("Happiness Score: " + happy.HappinessScore);
-        tooltip.append("div").attr("class", "tooltip-label").text("Freedom Score: " + happy.HumanFreedomScore)
+        tooltip.append("div").attr("class", "tooltip-label").text(filtered.Country);
+        tooltip.append("div").attr("class", "tooltip-label").text("Happiness Score: " + filtered.HappinessScore);
+        tooltip.append("div").attr("class", "tooltip-label").text("Freedom Score: " + filtered.HumanFreedomScore)
 
 
         const countryName = country.attr('name');

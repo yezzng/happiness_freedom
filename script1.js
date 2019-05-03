@@ -4,7 +4,15 @@
   d3.csv("../data/2015happyFreedom.csv").then( function(data) {
 
     
-    data.forEach( (d, i) => {
+    // clean up data
+    var filtered = data.filter(d => d['HumanFreedomRank'] !== NaN &&
+    d['HumanFreedomRank'] > 0 &&
+    d['HumanFreedomRank'].length !== 0 &&
+    d['HumanFreedomScore'] !== NaN && 
+    d['HumanFreedomScore'] > 0 && 
+    d['HumanFreedomScore'].length !== 0);
+
+    filtered.forEach( (d, i) => {
       d['HumanFreedomScore'] =  Number(d["HumanFreedomScore"])  ;
       d['HumanFreedomRank'] =  Number(d["HumanFreedomRank"])   ;
       d['HappinessRank'] =  Number(d["HappinessRank"])   ;
@@ -14,6 +22,9 @@
   
 
     console.log(data);
+
+
+
 
     let svg2 = d3.select("#scatterplot");
     let width2 = svg2.attr("width");
@@ -28,31 +39,31 @@
 
     var g= svg2.append("g").attr("transform","translate("+ margin2.left + ","+ margin2.top + ")");
 
-    const happyMin = d3.min(data, d => d['HappinessScore']);
-    const happyMax = d3.max(data, d => d['HappinessScore']);
+    const happyMin = d3.min(filtered, d => d['HappinessScore']);
+    const happyMax = d3.max(filtered, d => d['HappinessScore']);
     const happyScale = d3.scaleLinear()
             .domain([1, 10])
-            .range([0, width2]); 
+            .range([-10, width2]); 
    
-    const freeMin = d3.min(data, d => d['HumanFreedomScore']);
-    const freeMax = d3.max(data, d => d['HumanFreedomScore']);
+    const freeMin = d3.min(filtered, d => d['HumanFreedomScore']);
+    const freeMax = d3.max(filtered, d => d['HumanFreedomScore']);
     const freeScale = d3.scaleLinear()
                     .domain([1, 10])
-                    .range([height2,0]);
+                    .range([height2, 50]);
     const regionScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     
 
     let leftAxis = d3.axisLeft(freeScale); // ticks looked fine here
     svg2.append("g").attr("class", "y axis") // Not d3-required. Just helpful for styling
-      .attr("transform","translate("+ (margin2.left-10) +","+ margin2.top +")")
+      .attr("transform","translate("+ (margin2.left-10) +","+ (margin2.top - 50) +")")
       .call(leftAxis);
 
 
       let bottomAxis = d3.axisBottom(happyScale).ticks(10, d3.format("1")); 
   
     let element = svg2.append("g").attr("class", "x axis")
-      .attr("transform","translate("+ margin2.left +","+ (margin2.top + chartHeight2 + 10) +")");
+      .attr("transform","translate("+ (margin2.left +10) +","+ (margin2.top + chartHeight2 + 10) +")");
     bottomAxis(element); 
 
 
@@ -63,7 +74,7 @@
     let scatter = svg2.append("g") // We make a subgroup to contain the points we are adding, and use the margins to shrink it and move it to the right place, so that it doesn't overlap our axes
           .attr("transform","translate("+margin2.left+","+margin2.top+")");
 
-          data.forEach( (d, i) => {
+          filtered.forEach( (d, i) => {
 
             let happy = happyScale(d['HappinessScore']);
             let free = freeScale(d['HumanFreedomScore']);
@@ -85,7 +96,7 @@
                       .duration(200)		
                       .style("opacity", .9);		
                       
-                      div1.html("Country: "+country+ "<br/>"+"Happiness Rank: "+happyrank+ "<br/>"+"Human Freedom Rank: "+freerank)	
+                      div1.html("Country: "+country+ "<br/>"+"Happiness Score: "+happy+ "<br/>"+"Human Freedom Score: "+free)	
                       .style("left", (d3.event.pageX) + "px")		
                       .style("top", (d3.event.pageY - 28) + "px");})
                 .on("mouseout", function(d) {		
