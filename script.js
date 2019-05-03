@@ -17,7 +17,14 @@ const requestData = async () => {
 
     // check data
     console.log(happy);
+<<<<<<< HEAD
     console.log(world);
+=======
+
+    const countries = topojson.feature( world, world.objects.countries );
+
+    //console.log(world);
+>>>>>>> a141c5f54d504038a57dfbe868a8e5ed18d52912
 
     // draw a world map
     const countries = topojson.feature( world, world.objects.countries );
@@ -25,6 +32,7 @@ const requestData = async () => {
     var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
     var path = d3.geoPath().projection( projection );
 
+<<<<<<< HEAD
     // clean up data
     happy.forEach( (d, i) => {
       d['HappinessScore'] = Number(d['HappinessScore']);
@@ -36,6 +44,8 @@ const requestData = async () => {
     console.log(happy);
 
     
+=======
+>>>>>>> a141c5f54d504038a57dfbe868a8e5ed18d52912
 
     svg.selectAll("path").data(countries.features)
         .enter()
@@ -81,6 +91,22 @@ const requestData = async () => {
         .datum(countriesMesh)
         .attr("class", "outline")
         .attr("d", path);
+
+    //generating counts
+    let countryCounts = {};
+    let idToCountry = {};
+    happy.forEach( row => {
+      countryCounts[row.name] = 0;
+      idToCountry[row.id] = row.name;
+    })
+
+    //making color scale
+    const colorScale = d3.scaleQuantile()
+                          .domain( [0, 10] )
+                          .range( ['#CDDBF7', '#224499']);
+
+    map.selectAll(".state")
+        .style( "fill", d => colorScale( countryCounts[ idToCountry[d.id] ] ) );
 
     // create tooltip to show name of the country and data point
     var tooltip = d3.select("#mapContainer").append("div")
