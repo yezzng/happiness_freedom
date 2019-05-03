@@ -24,7 +24,7 @@
 /* header */
 
 header {
-  padding: 15px 15px 15px 15px;
+  padding: 0px;
   font-family: 'Avenir Next';
   color:#224499;
   background-color: none;
@@ -36,9 +36,12 @@ body {
 }
 
 h2 {
-  padding: 40px;
+  padding: 30px;
 }
 
+simpleLegend {
+  text-align: center; 
+}
 /* footer */
 
 footer {
