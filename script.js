@@ -17,6 +17,7 @@ const requestData = async () => {
 
   const countries = topojson.feature( world, world.objects.countries );
 
+console.log(countries);
   const countriesMesh = topojson.mesh( world, world.objects.countires );
   var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
   var path = d3.geoPath().projection( projection );
