@@ -15,18 +15,21 @@ const map = svg.append("g")
 
 const requestData = async () => {
 
-  //loading datasets
-  const world = await d3.json("/world_110m.json");
-  const happy = await d3.csv("data/2015happyFreedom.csv");
+    //loading datasets
+    const world = await d3.json("/world_110m.json");
+    const happy = await d3.csv("data/2015happyFreedom.csv");
 
-  const countries = topojson.feature( world, world.objects.countries );
+    console.log(happy);
 
-console.log(world);
-  const countriesMesh = topojson.mesh( world, world.objects.countries );
-  var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
-  var path = d3.geoPath().projection( projection );
+    const countries = topojson.feature( world, world.objects.countries );
 
-  svg.selectAll("path").data(countries.features)
+    console.log(world);
+
+    const countriesMesh = topojson.mesh( world, world.objects.countries );
+    var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
+    var path = d3.geoPath().projection( projection );
+
+    svg.selectAll("path").data(countries.features)
         .enter()
         .append("path")
         .attr("class", "country")
@@ -37,9 +40,49 @@ console.log(world);
         .attr("class", "outline")
         .attr("d", path);
 
+    // create tooltip to show name of the country and data point
+    var tooltip = d3.select("#mapContainer").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+    
+    // mouse on and off for tooltip
+    svg.selectAll('path')
+        .on("mousemove", mouseOnPlot)
+        .on("mouseout", mouseLeavesPlot)
+        .attr("name", function (d) { return d.Country; });
 
-  console.log(happy);
 
+    var tooltipWidth = parseFloat(tooltip.style("width"));
+    var tooltipHeight = parseFloat(tooltip.style("height"));
+
+
+    function mouseOnPlot() {
+        // Move the tooltip
+        const x = (event.pageX - (tooltipWidth / 2.0));
+        const y = (event.pageY - tooltipHeight + 20);
+        tooltip.style("left", x + 'px');
+        tooltip.style("top", y + 'px');
+
+        // Clear tooltip
+        tooltip.html("");
+
+        // Give tooltip a label
+        let country = d3.select(this);
+        tooltip.append("div").attr("class", "tooltip-label").text(happy.Country);
+        tooltip.append("div").attr("class", "tooltip-label").text("Happiness Score: " + happy.HappinessScore);
+        tooltip.append("div").attr("class", "tooltip-label").text("Freedom Score: " + happy.HumanFreedomScore)
+        
+        
+        const countryName = country.attr('name');
+        tooltip.append('div')
+          .attr("class", "tooltip-content")
+          .text(countryName);
+
+    }
+
+    function mouseLeavesPlot() {
+      tooltip.style("opacity", 0);
+    }
 
 
 
