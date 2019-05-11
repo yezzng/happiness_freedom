@@ -9,6 +9,7 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
   <script src="https://d3js.org/topojson.v2.min.js"></script>
+  <script src="http://d3js.org/queue.v1.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/all.css">
   <style>
 		svg {
@@ -75,9 +76,12 @@
     </h2>
     </center>
     <!-- <h2 align="center">How free are people across the world? </h2>-->
+    <button onclick="changeColor('blue')">Economic Freedom</button>
+    <button onclick="changeColor('red')">Human Freedom</button>
+    <button onclick="changeColor('blue')">Overall Freedom</button>
     <svg id = "map" width = "962" height = "600"></svg>
     <svg id="mapLegend" class="mapLegend"> </svg>
-
+   
     <center>
     <h2>
       <font color="#81d4fa" >Does freedom have anything to do with happiness?</font>
@@ -86,10 +90,10 @@
     <!--<h2 align="center"> Does freedom have anything to do with happiness? </h2>-->
     <svg id="scatterplot" height="500" width="500" style="background: #fff; margin-top:50px" ></svg>
     <div id="simpleLegend" > </div>
-
-      <script type="text/javascript"  src="/script.js"></script>
+    
+     
     <script type="text/javascript"  src="/script.1.js"></script>
-
+    <script type="text/javascript"  src="/script.2.js"></script>
     </div>
 </body>
 
