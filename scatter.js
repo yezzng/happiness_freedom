@@ -11,9 +11,14 @@
       d['HappinessScore'] =  Number(d["HappinessScore"])   ;
     });
 
-  
+    var filtered = data.filter(d => d['HumanFreedomRank'] !== NaN &&
+    d['HumanFreedomRank'] > 0 &&
+    d['HumanFreedomRank'].length !== 0 &&
+    d['HumanFreedomScore'] !== NaN && 
+    d['HumanFreedomScore'] > 0 && 
+    d['HumanFreedomScore'].length !== 0);
 
-    console.log(data);
+    console.log(filtered);
 
     let svg = d3.select("svg#scatterplot");
     let width = svg.attr("width");
@@ -28,14 +33,14 @@
 
     var g= svg.append("g").attr("transform","translate("+ margin.left + ","+ margin.top + ")");
 
-    const happyMin = d3.min(data, d => d['HappinessScore']);
-    const happyMax = d3.max(data, d => d['HappinessScore']);
+    const happyMin = d3.min(filtered, d => d['HappinessScore']);
+    const happyMax = d3.max(filtered, d => d['HappinessScore']);
     const happyScale = d3.scaleLinear()
             .domain([1, 10])
             .range([0, width]); 
    
-    const freeMin = d3.min(data, d => d['HumanFreedomScore']);
-    const freeMax = d3.max(data, d => d['HumanFreedomScore']);
+    const freeMin = d3.min(filtered, d => d['HumanFreedomScore']);
+    const freeMax = d3.max(filtered, d => d['HumanFreedomScore']);
     const freeScale = d3.scaleLinear()
                     .domain([1, 10])
                     .range([height,0]);
@@ -63,7 +68,7 @@
     let scatter = svg.append("g") // We make a subgroup to contain the points we are adding, and use the margins to shrink it and move it to the right place, so that it doesn't overlap our axes
           .attr("transform","translate("+margin.left+","+margin.top+")");
 
-          data.forEach( (d, i) => {
+          filtered.forEach( (d, i) => {
 
             let happy = happyScale(d['HappinessScore']);
             let free = freeScale(d['HumanFreedomScore']);
