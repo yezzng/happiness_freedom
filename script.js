@@ -32,8 +32,8 @@ const requestData = async () => {
     var filtered = happy.filter(d => d['HumanFreedomRank'] !== NaN &&
     d['HumanFreedomRank'] > 0 &&
     d['HumanFreedomRank'].length !== 0 &&
-    d['HumanFreedomScore'] !== NaN && 
-    d['HumanFreedomScore'] > 0 && 
+    d['HumanFreedomScore'] !== NaN &&
+    d['HumanFreedomScore'] > 0 &&
     d['HumanFreedomScore'].length !== 0);
   var score=[];
     filtered.forEach( (d, i) => {
@@ -68,8 +68,8 @@ const requestData = async () => {
       idToCountry[row.id] = row.name;
     })
 
-   
-    
+
+
     const colorScale = d3.scaleQuantize()
     .domain( [0, 10] )
     .range( ['#00f9ff', '#0051ff']);
