@@ -9,6 +9,7 @@ const mapHeight = height - margin.top - margin.bottom;
 const map = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    function draw(){
 const requestData = async () => {
 
     //loading datasets
@@ -22,7 +23,7 @@ const requestData = async () => {
     // draw a world map
     const countries = topojson.feature( world, world.objects.countries );
     const countriesMesh = topojson.mesh( world, world.objects.countries );
-    var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
+  //  var projection = d3.geoGraticule().fitSize( [mapWidth, mapHeight], countries );
     var path = d3.geoPath().projection( projection );
 
 
@@ -157,3 +158,5 @@ const requestData = async () => {
 
 };
 requestData();
+
+    }
