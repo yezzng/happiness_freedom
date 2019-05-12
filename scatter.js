@@ -97,6 +97,7 @@
             let country=d['Country'];
             let happyScore=d['HappinessScore'];
             let freeScore=d['HumanFreedomScore'];
+
             // Draw
             let circle = scatter.append("circle")
                   .attr("cx", happy)
@@ -120,7 +121,22 @@
                       .style("opacity", 0);});	
       
           });
-          
+
+          // create check boxes
+          let box1 = d3.select("checkbox#box1");
+          let box2 = d3.select("checkbox#box2");
+          let box3 = d3.select("checkbox#box3");
+          let box4 = d3.select("checkbox#box4");
+          let box5 = d3.select("checkbox#box5");
+          let box6 = d3.select("checkbox#box6");
+          let box7 = d3.select("checkbox#box7");
+          let box8 = d3.select("checkbox#box8");
+          let box9 = d3.select("checkbox#box9");
+          let box10 = d3.select("checkbox#box10");
+
+
+        
+          // Regions
           regionScale.domain().forEach(function(d,i) {
             d3.select("#simpleLegend")
               .append("span").text(d)
