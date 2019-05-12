@@ -3,22 +3,23 @@
 
   d3.csv("../data/2015happyFreedom.csv").then( function(data) {
 
-    
-    data.forEach( (d, i) => {
-      d['HumanFreedomScore'] =  Number(d["HumanFreedomScore"])  ;
-      d['HumanFreedomRank'] =  Number(d["HumanFreedomRank"])   ;
-      d['HappinessRank'] =  Number(d["HappinessRank"])   ;
-      d['HappinessScore'] =  Number(d["HappinessScore"])   ;
-    });
-
     var filtered = data.filter(d => d['HumanFreedomRank'] !== NaN &&
     d['HumanFreedomRank'] > 0 &&
     d['HumanFreedomRank'].length !== 0 &&
     d['HumanFreedomScore'] !== NaN && 
     d['HumanFreedomScore'] > 0 && 
     d['HumanFreedomScore'].length !== 0);
+    
+    filtered.forEach( (d, i) => {
+      d['HumanFreedomScore'] =  Number(d["HumanFreedomScore"])  ;
+      d['HumanFreedomRank'] =  Number(d["HumanFreedomRank"])   ;
+      d['HappinessRank'] =  Number(d["HappinessRank"])   ;
+      d['HappinessScore'] =  Number(d["HappinessScore"])   ;
+    });
 
-    console.log(filtered);
+
+
+    // console.log(filtered);
 
     let svg = d3.select("svg#scatterplot");
     let width = svg.attr("width");
@@ -29,7 +30,6 @@
    
 
     
-
 
     var g= svg.append("g").attr("transform","translate("+ margin.left + ","+ margin.top + ")");
 
@@ -50,17 +50,38 @@
 
     let leftAxis = d3.axisLeft(freeScale); // ticks looked fine here
     svg.append("g").attr("class", "y axis") // Not d3-required. Just helpful for styling
-      .attr("transform","translate("+ (margin.left-10) +","+ margin.top +")")
+      .attr("transform","translate("+ (margin.left-10) +","+ (margin.top-50) +")")
       .call(leftAxis);
 
 
-      let bottomAxis = d3.axisBottom(happyScale).ticks(10, d3.format("1")); 
+    let bottomAxis = d3.axisBottom(happyScale).ticks(10, d3.format("1")); 
   
     let element = svg.append("g").attr("class", "x axis")
-      .attr("transform","translate("+ margin.left +","+ (margin.top + chartHeight + 10) +")");
+      .attr("transform","translate("+ (margin.left) +","+ (margin.top + chartHeight + 20) +")");
     bottomAxis(element); 
 
 
+    // labels
+    // x label
+    svg.append("text")
+        .attr("class", "time")
+        .attr("x", width / 2)
+        .attr("y", chartHeight + 60)
+        .attr("font-size", "14px")
+        .attr("text-anchor", "middle")
+        .text("Freedom Score");
+
+    // y label
+    svg.append("text")
+        .attr("class", "humidity")
+        .attr("x", - chartHeight / 2)
+        .attr("y", 10)
+        .attr("font-size", "14px")
+        .attr("text-anchor", "middle")
+        .attr("transform", "rotate(-90)")
+        .text("Happiness Score");
+
+    // tooltip
     var div1 = d3.select("body").append("div")	
     .attr("class", "tooltip1")				
     .style("opacity", 1);
