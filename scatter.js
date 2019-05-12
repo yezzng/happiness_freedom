@@ -37,24 +37,24 @@
     const happyMax = d3.max(filtered, d => d['HappinessScore']);
     const happyScale = d3.scaleLinear()
             .domain([1, 10])
-            .range([0, width]); 
+            .range([0, chartWidth]); 
    
     const freeMin = d3.min(filtered, d => d['HumanFreedomScore']);
     const freeMax = d3.max(filtered, d => d['HumanFreedomScore']);
     const freeScale = d3.scaleLinear()
                     .domain([1, 10])
-                    .range([height,0]);
+                    .range([chartHeight,0]);
     const regionScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     
 
     let leftAxis = d3.axisLeft(freeScale); // ticks looked fine here
     svg.append("g").attr("class", "y axis") // Not d3-required. Just helpful for styling
-      .attr("transform","translate("+ (margin.left-10) +","+ (margin.top-50) +")")
+      .attr("transform","translate("+ (margin.left-10) +","+ (margin.top) +")")
       .call(leftAxis);
 
 
-    let bottomAxis = d3.axisBottom(happyScale).ticks(10, d3.format("1")); 
+    let bottomAxis = d3.axisBottom(happyScale).ticks(10); 
   
     let element = svg.append("g").attr("class", "x axis")
       .attr("transform","translate("+ (margin.left) +","+ (margin.top + chartHeight + 20) +")");
