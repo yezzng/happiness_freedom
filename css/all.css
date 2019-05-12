@@ -35,12 +35,17 @@ body {
   font-family: 'Avenir Next';
 }
 
+h1 {
+  font: #224499;
+}
+
 h2 {
   padding: 30px;
+  font: #224499;
 }
 
 simpleLegend {
-  text-align: center; 
+  text-align: center;
 }
 /* footer */
 
