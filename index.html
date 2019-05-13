@@ -6,69 +6,20 @@
   <title>5100 Project 3</title>
   <link rel="stylesheet" type="text/css" href="./css/all.css">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
   <script src="https://d3js.org/topojson.v2.min.js"></script>
   <script src="http://d3js.org/queue.v1.min.js"></script>
+
   <link rel="stylesheet" type="text/css" href="css/all.css">
-  <style>
-		svg {
-			display: block;
-			margin: 0 auto;
-		}
-    div.tooltip1 {
-        position: absolute;
-        text-align: center;
-        width: auto;
-        height: auto;
-        padding: 2px;
-        font: 12px sans-serif;
-        background: burlywood;
-        border: 0px;
-        border-radius: 8px;
-        pointer-events: none;
-    }
-    .country {
-                fill: lightgrey;
-                stroke: none;
-                }
-
-       .outline{
-                stroke: black;
-                stroke-width: 1px;
-                 fill: none;
-                }
-      .graticule {
-                  fill: none;
-                  stroke:  lightgrey ;
-                   }
-
-      .districts{
-                stroke: white;
-                stroke-width: 1px;
-                 fill: none;
-                }
-
-    body {
-	background-color: none;
-    }
-
-	</style>
 </head>
 
-
-<header>
-  <h1 align="center"> Does freedom bring you happiness? </h1>
-</header>
-
-
 <body>
-
+  <header>
+    <h1 align="center"> Does freedom bring you happiness? </h1>
+  </header>
   <div id = "mapContainer">
-    <center>
-    <h2>
-    </h2>
-    </center>
     <h2 align="center">How free are people across the world? </h2>
     <button onclick="changeColor('blue')">Economic Freedom</button>
     <button onclick="changeColor('red')">Human Freedom</button>

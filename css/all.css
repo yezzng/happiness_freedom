@@ -35,10 +35,6 @@ body {
   font-family: 'Avenir Next';
 }
 
-h1 {
-  font: #224499;
-}
-
 h2 {
   padding: 30px;
   font: #224499;
@@ -78,4 +74,45 @@ footer a {
 .column a {
   /* width: 40%; */
   text-align: center;
+}
+
+svg {
+  display: block;
+  margin: 0 auto;
+}
+div.tooltip1 {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: burlywood;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+.country {
+            fill: lightgrey;
+            stroke: none;
+            }
+
+   .outline{
+            stroke: black;
+            stroke-width: 1px;
+             fill: none;
+            }
+  .graticule {
+              fill: none;
+              stroke:  lightgrey ;
+               }
+
+  .districts{
+            stroke: white;
+            stroke-width: 1px;
+             fill: none;
+            }
+
+body {
+background-color: none;
 }
