@@ -177,6 +177,7 @@ p {
 .grid line {
   stroke: lightgrey;
 }
+
 .grid path {
     stroke-width: 0.5;
 }

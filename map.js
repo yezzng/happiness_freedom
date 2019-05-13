@@ -66,8 +66,6 @@ const minMax = [1, 10];
   var color = d3.scaleLinear()
                 .domain( minMax )
                 .range( [ '#CDDBF7', '#224499' ] );
-                // .clamp( true )
-                // .interpolate( d3.interpolateHcl );
 
   // create tooltip to show name of the country and scores
   var div2 = d3.select( "body" ).append("div")
@@ -84,12 +82,12 @@ const minMax = [1, 10];
       .style( "fill",function( d,i ) {
         count = d.id;
         countryf = filtered.filter( d => d[ 'Id' ] == count );
-        var score=[]; 
+        var score=[];
         // Give tooltip a label
         countryf.forEach( ( d, i ) => {
           score =  d [ 'HumanFreedomScore' ];
-         
-        }) 
+
+        })
         return color(score);
          }) //coloring the map
       .on( "mousemove", function( d,i ) {
@@ -107,9 +105,6 @@ const minMax = [1, 10];
                   .style("left", ( d3.event.pageX + 9 ) + "px" )
                   .style( "top", ( d3.event.pageY - 40 ) + "px" );
           })
-//color map -> not really
-  // svg.selectAll( ".country" ).style(  "fill", ( d,i ) => color( score[ i ] )  );
-
 
         })
 
