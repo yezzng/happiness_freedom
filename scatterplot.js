@@ -126,19 +126,6 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
   let box9 = d3.select("checkbox#box9");
   let box10 = d3.select("checkbox#box10");
 
-  // // If the data set’s region of the country = user-selected region
-  // // AND country freedomRank is 1, 2, or 3, then print the country
-  // //var userInput = document.getElementById("box1");
-  // //var userInputCountry = "Albania";
-  // console.log(filtered);
-  // console.log(filtered[1]["Region"]);
-  // if ( userInput === filtered["Region"] &&
-  //     ( d["HumanFreedomRank"] === 1 ||
-  //     d["HumanFreedomRank"] === 2 ||
-  //     d["HumanFreedomRank"] === 3 )) {
-  //   console.log( d["Country"]);
-  // }
-
   // Regions
   regionScale.domain().forEach( function( d,i ) {
     var regionText = d3.select( "#simpleLegend" )
