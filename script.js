@@ -17,7 +17,6 @@ const requestData = async () => {
     const happy = await d3.csv("../data/2015happyFreedom.csv");
 
     // check data
-
     console.log(world);
 
     // draw a world map
