@@ -64,6 +64,7 @@ const requestData = async () => {
       .append( "path" )
       .attr( "class", "country" )
       .attr("d", path)
+<<<<<<< HEAD
       .style( "fill", ( d,i ) => color( score[ i ] ) )
       .on( "mousemove", function( d,i ) {
         count = d.id;
@@ -88,6 +89,28 @@ const requestData = async () => {
                     .duration(50)
                     .style("opacity", 0);
                 });
+=======
+      .style("fill", (d,i) => color(score[i]))
+      .on("mousemove", function(d,i) {
+        count=d.id;
+        countryf= happy.filter(d => d['Id']==count);
+        countryf.forEach( (d, i) => {
+          var score = Number(d['HumanFreedomScore']);
+          var  name=d['Country'];
+
+          div2.style("opacity", .9);
+
+          div2.html("Country: "+name+ "<br/>"+"Freedom Score: "+score)
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY - 28) + "px");
+        })
+          svg.selectAll("path").style("fill", (d,i) => color(score[i]));
+        })
+      .on("mouseout", function(d) {
+          div2.transition()
+            .duration(50)
+            .style("opacity", 0);});
+>>>>>>> 1794a1f4206c17ad6ca7ee61592308438e69be9b
 
   // create legend
   var linearScale = d3.scaleLinear()
@@ -132,7 +155,11 @@ const requestData = async () => {
       .datum( countriesMesh )
       .attr( "class", "outline" )
       .attr( "d", path) ;
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 1794a1f4206c17ad6ca7ee61592308438e69be9b
 };
 
 requestData();
