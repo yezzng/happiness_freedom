@@ -147,6 +147,7 @@
           //   console.log( d["Country"]);
           // }
 
+          
           // Regions
           regionScale.domain().forEach(function(d,i) {
             d3.select("#simpleLegend")
@@ -163,6 +164,7 @@
                   }
                 })
               })
+              .append('br');
           });
 
 
