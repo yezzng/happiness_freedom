@@ -105,12 +105,13 @@ svg {
 .column {
   float: left;
   width: 50%;
-  padding: 10px;
+  padding-left: 100px;
 }
 
 .mapGroup {
-
+  float: right;
   padding-top: 120px;
+  padding-right: 100px;
 }
 
 
