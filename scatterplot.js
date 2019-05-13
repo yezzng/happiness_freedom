@@ -163,6 +163,8 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
                   //  .on("mouseover", "");
             }
         })
+        regionText.style( "background-color", regionScale( d ) );
+        regionText.style( "color", "white" );
 
       })
       .append('br');
