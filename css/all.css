@@ -23,15 +23,22 @@ h2 {
 
 .button {
   font-family: 'Avenir Next';
-  margin: auto;
+  font-size: 15px; 
+  font-weight: bold;
+  background-color: white;
+  color: #224499;
+  border-color: #224499;
+  border-radius: 5px;
+  border-width: 2px;
   display: block;
-  width: 12%;
+  width: 10%;
+  height: 150%;
+  padding: 5px;
 }
 
 .button:hover {
   background-color: #224499;
   color: white;
-
 }
 
 #economicFreedomButton {
