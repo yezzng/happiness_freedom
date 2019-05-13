@@ -74,9 +74,7 @@ const minMax = [1, 10];
         .style( "opacity", 1 );
 
 
-  //color map
-  // svg.selectAll( ".country" ).style(  "fill", ( d,i ) => color( score[ i ] )  );
-
+  
   // mouse on and off for tooltip
   svg.selectAll( "path" ).data( countries.features )
       .enter()
@@ -85,7 +83,7 @@ const minMax = [1, 10];
       .attr("d", path)
       .style( "fill", ( d,i ) => color( score[ i ] ) )
       .on( "mousemove", function( d,i ) {
-        count = d.Id;
+        count = d.id;
         countryf = happy.filter( d => d[ 'Id' ] == count );
 
         // Give tooltip a label
@@ -97,6 +95,8 @@ const minMax = [1, 10];
                   .style("left", ( d3.event.pageX ) + "px" )
                   .style( "top", ( d3.event.pageY - 28 ) + "px" );
           })
+//color map
+  svg.selectAll( ".country" ).style(  "fill", ( d,i ) => color( score[ i ] )  );
 
 
         })
