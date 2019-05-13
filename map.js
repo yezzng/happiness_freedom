@@ -67,26 +67,24 @@ const requestData = async () => {
 
         count=d.id;
 
+            countryf= happy.filter(d => d['Id']==count);
+  //         console.log("contry"+JSON.stringify(countryf));
+            countryf.forEach( (d, i) => {
+              var score = Number(d['HumanFreedomScore']);
+              var  name=d['Country'];
 
-                countryf= happy.filter(d => d['Id']==count);
-       //         console.log("contry"+JSON.stringify(countryf));
-                countryf.forEach( (d, i) => {
-                 var score = Number(d['HumanFreedomScore']);
-                var  name=d['Country'];
-               //   id[i]=Number(d['Id']);
+              div2.style("opacity", .9);
 
-                div2
-                  .style("opacity", .9);
-
-                  div2.html("Country: "+name+ "<br/>"+"Freedom Score: "+score)
-                  .style("left", (d3.event.pageX) + "px")
-                  .style("top", (d3.event.pageY - 28) + "px");})
-                  svg.selectAll("path").style("fill", (d,i) => color(score[i]));
-                })
-            .on("mouseout", function(d) {
-                div2.transition()
-                  .duration(50)
-                  .style("opacity", 0);});
+              div2.html("Country: "+name+ "<br/>"+"Freedom Score: "+score)
+              .style("left", (d3.event.pageX) + "px")
+              .style("top", (d3.event.pageY - 28) + "px");
+            })
+              svg.selectAll("path").style("fill", (d,i) => color(score[i]));
+            })
+        .on("mouseout", function(d) {
+            div2.transition()
+              .duration(50)
+              .style("opacity", 0);});
 
   //generating counts in order to make a color scale
   let countryCounts = {};
@@ -146,47 +144,6 @@ const requestData = async () => {
       .datum( countriesMesh )
       .attr( "class", "outline" )
       .attr( "d", path) ;
-
-  // create tooltip to show name of the country and scores
-  var tooltip = d3.select( "#mapContainer" ).append( "div" )
-      .attr( "class", "tooltip" )
-      .style( "opacity", 0 );
-
-  // mouse on and off for tooltip
-  svg.selectAll( 'path' )
-      .on( "mousemove", mouseOnPlot )
-      .on( "mouseout", mouseLeavesPlot )
-      .attr( "name", function( d ) { return d.Country; } );
-
-  var tooltipWidth = parseFloat(tooltip.style("width"));
-  var tooltipHeight = parseFloat(tooltip.style("height"));
-
-
-  function mouseOnPlot() {
-      // Move the tooltip
-      const x = ( event.pageX - ( tooltipWidth / 2.0 ) );
-      const y = ( event.pageY - tooltipHeight - 20 );
-      tooltip.style( "left", x + 'px' );
-      tooltip.style( "top", y + 'px' );
-
-      // Clear tooltip
-      tooltip.html( "" );
-
-      // Give tooltip a label
-      let country = d3.select( this );
-      tooltip.append("div").attr("class", "tooltip-label" ).text( filtered.Country );
-      tooltip.append("div").attr("class", "tooltip-label" ).text( "Happiness Score: " + filtered.HappinessScore );
-      tooltip.append("div").attr("class", "tooltip-label").text( "Freedom Score: " + filtered.HumanFreedomScore )
-
-      const countryName = country.attr( 'name' );
-      tooltip.append( "div" )
-        .attr( "class", "tooltip-content" )
-        .text( countryName );
-  }
-
-  function mouseLeavesPlot() {
-    tooltip.style( "opacity", 0 );
-  }
 
 };
 

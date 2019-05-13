@@ -95,11 +95,12 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
               div1.transition()
               .duration( 100 )
               .style( "opacity", 0.9 );
+              d3.select(this).attr("r", 10);
 
               div1.html( "Country: " + country + "<br/>" +
                         "Happiness Score: " + happyScore + "<br/>" +
                         "Human Freedom Score: " + freeScore )
-              .style( "left", ( d3.event.pageX ) + "px" )
+              .style( "left", ( d3.event.pageX + 15) + "px" )
               .style( "top", ( d3.event.pageY - 28 ) + "px" );
             }
           )
@@ -107,6 +108,7 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
             div1.transition()
             .duration( 100 )
             .style( "opacity", 0 );
+            d3.select(this).attr("r", 4)
           }
         );
   });
