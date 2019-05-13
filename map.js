@@ -10,7 +10,7 @@ const map = svg.append("g")
 
 const requestData = async () => {
 
-  //loading datasets
+  // load datasets
   const world = await d3.json("../data/world_110m.json");
 
   let filterCountry = ['010', '304'];
@@ -37,7 +37,7 @@ const requestData = async () => {
                                     d[ 'HumanFreedomScore' ] > 0 &&
                                     d[ 'HumanFreedomScore' ].length !== 0 );
 
-
+  // generate counts in order to make a color scale
   var score = [];
   filtered.forEach( (d, i) => {
     score[ i ] = Number( d[ 'HappinessScore' ] );
@@ -53,52 +53,43 @@ const requestData = async () => {
                 .clamp( true )
                 .interpolate( d3.interpolateHcl );
 
+  // create tooltip to show name of the country and scores
   var div2 = d3.select( "body" ).append("div")
         .attr( "class", "tooltip1" )
         .style( "opacity", 1 );
 
+  // mouse on and off for tooltip
   svg.selectAll( "path" ).data( countries.features )
       .enter()
       .append( "path" )
       .attr( "class", "country" )
       .attr("d", path)
-      .style("fill", (d,i) => color(score[i]))
-      .on("mousemove", function(d,i) {
-        count=d.id;
-        countryf= happy.filter(d => d['Id']==count);
-        countryf.forEach( (d, i) => {
-          var score = Number(d['HumanFreedomScore']);
-          var  name=d['Country'];
+      .style( "fill", ( d,i ) => color( score[ i ] ) )
+      .on( "mousemove", function( d,i ) {
+        count = d.id;
+        countryf = happy.filter( d => d[ 'Id' ] == count );
 
-          div2.style("opacity", .9);
+        // Give tooltip a label
+        countryf.forEach( ( d, i ) => {
+          var score = Number( d [ 'HumanFreedomScore' ] );
+          var name = d[ 'Country' ];
+          div2.style( "opacity", .9 );
+          div2.html( "Country: " + name + "<br/>" + "Freedom Score: " + score )
+                  .style("left", ( d3.event.pageX ) + "px" )
+                  .style( "top", ( d3.event.pageY - 28 ) + "px" );
+          })
 
-          div2.html("Country: "+name+ "<br/>"+"Freedom Score: "+score)
-          .style("left", (d3.event.pageX) + "px")
-          .style("top", (d3.event.pageY - 28) + "px");
+        //color map with colors
+        svg.selectAll( "path" ).style( "fill", ( d,i ) => color( score[ i ] ) );
         })
-          svg.selectAll("path").style("fill", (d,i) => color(score[i]));
-        })
-      .on("mouseout", function(d) {
-          div2.transition()
-            .duration(50)
-            .style("opacity", 0);});
 
-  //generating counts in order to make a color scale
-  // let countryCounts = {};
-  // let idToCountry = {};
-  // filtered.forEach( row => {
-  //   countryCounts[row.name] = 0;
-  //   idToCountry[row.id] = row.name;
-  // })
-  //
-  // const colorScale = d3.scaleQuantize()
-  // .domain( [0, 10] )
-  // .range( ['#00f9ff', '#0051ff']);
+        .on("mouseout", function( d ) {
+                div2.transition()
+                    .duration(50)
+                    .style("opacity", 0);
+                });
 
-  // coloring in map with colors
-  // map.selectAll(".country")
-  //   .style("fill", d => color(d.HumanFreedomScore));
-
+  // create legend
   var linearScale = d3.scaleLinear()
       .domain([0, 100])
       .range([0, 600]);
@@ -141,7 +132,6 @@ const requestData = async () => {
       .datum( countriesMesh )
       .attr( "class", "outline" )
       .attr( "d", path) ;
-
 };
 
 requestData();
