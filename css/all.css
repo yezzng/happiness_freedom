@@ -91,6 +91,15 @@ div.tooltip1 {
   pointer-events: none;
 }
 
+#lessFreedom {
+  position: absolute;
+  left: 0;
+}
+
+#moreFreedom {
+  right: 400px;
+}
+
 #scatterplotGroup {
   margin: 100px;
 }
