@@ -110,16 +110,25 @@ svg {
 
 .mapGroup {
   float: right;
-  padding-top: 120px;
   padding-right: 100px;
 }
 
-span text {
-  margin: 20px;
+#legendText {
+  border-style: solid;
+  border-width: 1px;
+  background-color: white;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+#legendText:hover {
+  background-color: #224499;
+  color: white; 
 }
 
 #resetButton {
-  float: left;
+  float: right;
   font-family: 'Avenir Next';
   font-size: 15px;
   background-color: white;
@@ -128,7 +137,8 @@ span text {
   border-style: solid;
   border-color: #224499;
   border-radius: 5px;
-  border-width: 2px;
+  border-width: 1px;
+  padding: 5px;
 }
 
 #resetButton:hover {

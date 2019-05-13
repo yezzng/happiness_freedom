@@ -36,13 +36,13 @@ const requestData = async () => {
                                     d[ 'HumanFreedomScore' ] !== NaN &&
                                     d[ 'HumanFreedomScore' ] > 0 &&
                                     d[ 'HumanFreedomScore' ].length !== 0 &&
-                              //  filtering newly added 
+                              //  filtering newly added
                                     d[ 'PersonalFreedom' ] !== NaN &&
                                     d[ 'PersonalFreedom' ] > 0 &&
                                     d[ 'PersonalFreedom' ].length !== 0 &&
                                     d[ 'EconomicFreedom' ] !== NaN &&
                                     d[ 'EconomicFreedom' ] > 0 &&
-                                    d[ 'EconomicFreedom' ].length !== 0  
+                                    d[ 'EconomicFreedom' ].length !== 0
                                     );
 
   // generate counts in order to make a color scale
@@ -107,7 +107,7 @@ const minMax = [1, 10];
                     .style("opacity", 0);
         });
 
-  
+
   // begin class notes
 
   // create legend
@@ -141,7 +141,7 @@ const minMax = [1, 10];
       .attr("y", 0)
       .attr("width", stepSize)
       .attr("height", barHeight)
-      .style("fill", color( pixelScale(i) )); 
+      .style("fill", color( pixelScale(i) ));
   }
 
   const newLocal = svg.append( "path" )
@@ -149,7 +149,7 @@ const minMax = [1, 10];
       .attr( "class", "outline" )
       .attr( "d", path) ;
 
-      
+
 };
 
 requestData();
