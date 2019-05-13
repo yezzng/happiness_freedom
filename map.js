@@ -1,181 +1,156 @@
-
 let svg = d3.select("#map");
 let width = svg.attr("width");
 let height = svg.attr("height");
-let margin = { top: 30, right: 20, bottom: 10, left: 20
-};
+let margin = { top: 30, right: 20, bottom: 10, left: 20 };
 
 const mapWidth = width - margin.left - margin.right;
 const mapHeight = height - margin.top - margin.bottom;
 const map = svg.append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-//    function draw(){
 const requestData = async () => {
-    //loading datasets
-    const world = await d3.json("../data/world_110m.json");
-    const happy = await d3.csv("../data/2015happyFreedom.csv");
 
-    // check data
-    console.log(world);
+  //loading datasets
+  const world = await d3.json("../data/world_110m.json");
+  const happy = await d3.csv("../data/2015happyFreedom.csv");
 
-    // draw a world map
-    var countries = topojson.feature( world, world.objects.countries );
-    var countriesMesh = topojson.mesh( world, world.objects.countries );
-    var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
-    var path = d3.geoPath().projection( projection );
+  // draw a world map
+  var countries = topojson.feature( world, world.objects.countries );
+  var countriesMesh = topojson.mesh( world, world.objects.countries );
+  var projection = d3.geoMercator().fitSize( [mapWidth, mapHeight], countries );
+  var path = d3.geoPath().projection( projection );
 
-    // clean up data
-    var filtered = happy.filter(d => d['HumanFreedomRank'] !== NaN &&
-    d['HumanFreedomRank'] > 0 &&
-    d['HumanFreedomRank'].length !== 0 &&
-    d['HumanFreedomScore'] !== NaN &&
-    d['HumanFreedomScore'] > 0 &&
-    d['HumanFreedomScore'].length !== 0);
-  var score=[];
-    filtered.forEach( (d, i) => {
-      score[i] = Number(d['HappinessScore']);
-      d['HappinessRank'] = Number(d['HappinessRank']);
-      d['HumanFreedomRank'] = Number(d['HumanFreedomRank']);
-      d['HumanFreedomScore'] = Number(d['HumanFreedomScore']);
+  // clean up data
+  var filtered = happy.filter(d => d[ 'HumanFreedomRank' ] !== NaN &&
+                                    d[ 'HumanFreedomRank' ] > 0 &&
+                                    d[ 'HumanFreedomRank' ].length !== 0 &&
+                                    d[ 'HumanFreedomScore' ] !== NaN &&
+                                    d[ 'HumanFreedomScore' ] > 0 &&
+                                    d[ 'HumanFreedomScore' ].length !== 0 );
 
-    })
+  var score = [];
+  filtered.forEach( (d, i) => {
+    score[ i ] = Number( d[ 'HappinessScore' ] );
+    d[ 'HappinessRank' ] = Number( d[ 'HappinessRank' ] );
+    d[ 'HumanFreedomRank' ] = Number( d[ 'HumanFreedomRank' ] );
+    d[ 'HumanFreedomScore' ] = Number( d[ 'HumanFreedomScore' ] );
+  });
 
-    console.log(filtered);
+  //create legend
+  var color = d3.scaleLinear()
+  .domain([1,10])
+  .range(['#CDDBF7', '#224499'])
+  .clamp(true)
+  .interpolate(d3.interpolateHcl);
 
-    var color=d3.scaleLinear()
-    .domain([1,10])
-    .range(['#CDDBF7', '#224499'])
-    .clamp(true)
-    .interpolate(d3.interpolateHcl);
+  svg.selectAll("path").data(countries.features)
+      .enter()
+      .append("path")
+      .attr("class", "country")
+      .attr("d", path)
+      .style("fill", (d,i) => color(score[i]));
 
+  //generating counts in order to make a color scale
+  let countryCounts = {};
+  let idToCountry = {};
+  filtered.forEach( row => {
+    countryCounts[row.name] = 0;
+    idToCountry[row.id] = row.name;
+  })
 
-    svg.selectAll("path").data(countries.features)
-        .enter()
-        .append("path")
-        .attr("class", "country")
-        .attr("d", path)
-        .style("fill", (d,i) => color(score[i]));
+  const colorScale = d3.scaleQuantize()
+  .domain( [0, 10] )
+  .range( ['#00f9ff', '#0051ff']);
 
-    //generating counts in order to make a color scale
-    let countryCounts = {};
-    let idToCountry = {};
-    filtered.forEach( row => {
-      countryCounts[row.name] = 0;
-      idToCountry[row.id] = row.name;
-    })
+  // coloring in map with colors
+  // map.selectAll(".country")
+  //   .style("fill", d => color(d.HumanFreedomScore));
 
+  var linearScale = d3.scaleLinear()
+      .domain([0, 100])
+      .range([0, 600]);
+  d3.select('#mapLegend')
+      .selectAll('rect')
+      .data(filtered)
+      .enter()
+      .append('rect')
+      .attr('x', function(d) {
+        return linearScale(d);
+      })
+      .attr('width', 300)
+      .attr('height', 30)
+      .style('fill', function(d) {
+        return colorScale(d);
+      });
 
+  //begin class notes
+  const legend = d3.select("#mapLegend");
+  const legendWidth = legend.attr("width");
+  const legendHeight = legend.attr("height");
+  const barHeight = 60;
+  const stepSize = 4;
 
-    const colorScale = d3.scaleQuantize()
-    .domain( [0, 10] )
-    .range( ['#00f9ff', '#0051ff']);
+  const pixelScale = d3.scaleLinear().domain([0,legendWidth-40]).range([minMax[0]-1,minMax[1]+1]);
 
-    // coloring in map with colors
-    map.selectAll(".country")
-      .style("fill", d => color(d.HumanFreedomScore));
+  //draw rectangles of color down the bar
+  let bar = legend.append("g").attr("transform","translate("+(20)+","+(0)+")")
+  for (let i=0; i<legendWidth-40; i=i+stepSize) {
+    bar.append("rect")
+      .attr("x", i)
+      .attr("y", 0)
+      .attr("width", stepSize)
+      .attr("height",barHeight)
+      .style("fill", colorScale( pixelScale(i) )); // pixels => countData => color
+  };
+  //end class notes
 
-    var linearScale = d3.scaleLinear()
-        .domain([0, 100])
-        .range([0, 600]);
-    d3.select('#mapLegend')
-        .selectAll('rect')
-        .data(filtered)
-        .enter()
-        .append('rect')
-        .attr('x', function(d) {
-          return linearScale(d);
-        })
-        .attr('width', 300)
-        .attr('height', 30)
-        .style('fill', function(d) {
-          return colorScale(d);
-        });
+  const newLocal = svg.append( "path" )
+      .datum( countriesMesh )
+      .attr( "class", "outline" )
+      .attr( "d", path) ;
 
-    const legend = d3.select("#mapLegend");
-    const legendWidth = legend.attr("width");
-    const legendHeight = legend.attr("height");
-    const barHeight = 60;
-    const stepSize = 4;
+  // create tooltip to show name of the country and scores
+  var tooltip = d3.select( "#mapContainer" ).append( "div" )
+      .attr( "class", "tooltip" )
+      .style( "opacity", 0 );
 
-    const pixelScale = d3.scaleLinear().domain([0,legendWidth-40]).range([minMax[0]-1,minMax[1]+1]);
-    // const barScale = d3.scaleLinear().domain([minMax[0]-1,minMax[1]+1]).range([0,legendWidth-40]);
-    // const barAxis = d3.axisBottom(barScale);
-    // legend.append("g")
-    //   .attr("class", "colorbar axis")
-    //   .attr("transform","translate("+(20)+","+(barHeight+5)+")")
-    //   .call(barAxis);
+  // mouse on and off for tooltip
+  svg.selectAll( 'path' )
+      .on( "mousemove", mouseOnPlot )
+      .on( "mouseout", mouseLeavesPlot )
+      .attr( "name", function( d ) { return d.Country; } );
 
-    //draw rectangles of color down the bar
-    let bar = legend.append("g").attr("transform","translate("+(20)+","+(0)+")")
-    for (let i=0; i<legendWidth-40; i=i+stepSize) {
-      bar.append("rect")
-        .attr("x", i)
-        .attr("y", 0)
-        .attr("width", stepSize)
-        .attr("height",barHeight)
-        .style("fill", colorScale( pixelScale(i) )); // pixels => countData => color
-    };
-
-
-    svg.append("path")
-        .datum(countriesMesh)
-        .attr("class", "outline")
-        .attr("d", path);
-
-
-
-
-
-    // create tooltip to show name of the country and data point
-    var tooltip = d3.select("#mapContainer").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-
-    // mouse on and off for tooltip
-    svg.selectAll('path')
-        .on("mousemove", mouseOnPlot)
-        .on("mouseout", mouseLeavesPlot)
-        .attr("name", function (d) { return d.Country; });
+  var tooltipWidth = parseFloat(tooltip.style("width"));
+  var tooltipHeight = parseFloat(tooltip.style("height"));
 
 
-    var tooltipWidth = parseFloat(tooltip.style("width"));
-    var tooltipHeight = parseFloat(tooltip.style("height"));
+  function mouseOnPlot() {
 
+      // Move the tooltip
+      const x = ( event.pageX - ( tooltipWidth / 2.0 ) );
+      const y = ( event.pageY - tooltipHeight - 20 );
+      tooltip.style( "left", x + 'px' );
+      tooltip.style( "top", y + 'px' );
 
-    function mouseOnPlot() {
-        // Move the tooltip
-        const x = (event.pageX - (tooltipWidth / 2.0));
-        const y = (event.pageY - tooltipHeight - 20);
-        tooltip.style("left", x + 'px');
-        tooltip.style("top", y + 'px');
+      // Clear tooltip
+      tooltip.html( "" );
 
-        // Clear tooltip
-        tooltip.html("");
+      // Give tooltip a label
+      let country = d3.select( this );
+      tooltip.append( "div" ).attr("class", "tooltip-label" ).text( filtered.Country );
+      tooltip.append( "div" ).attr("class", "tooltip-label" ).text( "Happiness Score: " + filtered.HappinessScore );
+      tooltip.append("div").attr("class", "tooltip-label").text( "Freedom Score: " + filtered.HumanFreedomScore )
 
-        // Give tooltip a label
-        let country = d3.select(this);
-        tooltip.append("div").attr("class", "tooltip-label").text(filtered.Country);
-        tooltip.append("div").attr("class", "tooltip-label").text("Happiness Score: " + filtered.HappinessScore);
-        tooltip.append("div").attr("class", "tooltip-label").text("Freedom Score: " + filtered.HumanFreedomScore)
+      const countryName = country.attr( 'name' );
+      tooltip.append( "div" )
+        .attr( "class", "tooltip-content" )
+        .text( countryName );
+  }
 
-
-        const countryName = country.attr('name');
-        tooltip.append("div")
-          .attr("class", "tooltip-content")
-          .text(countryName);
-
-    }
-
-    function mouseLeavesPlot() {
-      tooltip.style("opacity", 0);
-    }
-
-
-
-
+  function mouseLeavesPlot() {
+    tooltip.style( "opacity", 0 );
+  }
 
 };
-requestData();
 
-    //}
+requestData();
