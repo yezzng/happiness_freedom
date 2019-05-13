@@ -48,7 +48,7 @@ const requestData = async () => {
 
   var score = [];
   filtered.forEach( (d, i) => {
-    score[ i ] = Number( d[ 'HappinessScore' ] );
+    score[ i ] = Number( d[ 'HumanFreedomScore' ] );
     d[ 'HappinessRank' ] = Number( d[ 'HappinessRank' ] );
     d[ 'HumanFreedomRank' ] = Number( d[ 'HumanFreedomRank' ] );
     d[ 'HumanFreedomScore' ] = Number( d[ 'HumanFreedomScore' ] );
@@ -81,18 +81,28 @@ const minMax = [1, 10];
       .append( "path" )
       .attr( "class", "country" )
       .attr("d", path)
-      .style( "fill", ( d,i ) => color( score[ i ] ) ) //coloring the map
+      .style( "fill",function( d,i ) {
+        count = d.id;
+        countryf = filtered.filter( d => d[ 'Id' ] == count );
+        var score=[]; 
+        // Give tooltip a label
+        countryf.forEach( ( d, i ) => {
+          score =  d [ 'HumanFreedomScore' ];
+         
+        }) 
+        return color(score);
+         }) //coloring the map
       .on( "mousemove", function( d,i ) {
         count = d.id;
         countryf = filtered.filter( d => d[ 'Id' ] == count );
 
         // Give tooltip a label
         countryf.forEach( ( d, i ) => {
-          var score =  d [ 'HumanFreedomScore' ];
+         var score =  d [ 'HumanFreedomScore' ];
           var name = d[ 'Country' ];
           var rank = d[ 'HumanFreedomRank' ] ;
           div2.style( "opacity", .9 );
-          div2.html( "Country: " + name + "<br/>" + "Freedom Score: " + score 
+          div2.html( "Country: " + name + "<br/>" + "Freedom Score: " + score
           + "<br/>" + "Freedom Rank: " + rank )
                   .style("left", ( d3.event.pageX + 9 ) + "px" )
                   .style( "top", ( d3.event.pageY - 40 ) + "px" );
