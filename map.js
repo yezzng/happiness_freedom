@@ -64,27 +64,24 @@ const requestData = async () => {
       .attr("d", path)
       .style("fill", (d,i) => color(score[i]))
       .on("mousemove", function(d,i) {
-
         count=d.id;
+        countryf= happy.filter(d => d['Id']==count);
+        countryf.forEach( (d, i) => {
+          var score = Number(d['HumanFreedomScore']);
+          var  name=d['Country'];
 
-            countryf= happy.filter(d => d['Id']==count);
-  //         console.log("contry"+JSON.stringify(countryf));
-            countryf.forEach( (d, i) => {
-              var score = Number(d['HumanFreedomScore']);
-              var  name=d['Country'];
+          div2.style("opacity", .9);
 
-              div2.style("opacity", .9);
-
-              div2.html("Country: "+name+ "<br/>"+"Freedom Score: "+score)
-              .style("left", (d3.event.pageX) + "px")
-              .style("top", (d3.event.pageY - 28) + "px");
-            })
-              svg.selectAll("path").style("fill", (d,i) => color(score[i]));
-            })
-        .on("mouseout", function(d) {
-            div2.transition()
-              .duration(50)
-              .style("opacity", 0);});
+          div2.html("Country: "+name+ "<br/>"+"Freedom Score: "+score)
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY - 28) + "px");
+        })
+          svg.selectAll("path").style("fill", (d,i) => color(score[i]));
+        })
+      .on("mouseout", function(d) {
+          div2.transition()
+            .duration(50)
+            .style("opacity", 0);});
 
   //generating counts in order to make a color scale
   // let countryCounts = {};
