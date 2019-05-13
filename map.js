@@ -79,7 +79,7 @@ const requestData = async () => {
                   .style( "top", ( d3.event.pageY - 28 ) + "px" );
           })
 
-        //color map with colors
+        //color map
         svg.selectAll( "path" ).style( "fill", ( d,i ) => color( score[ i ] ) );
         })
 
@@ -87,19 +87,17 @@ const requestData = async () => {
                 div2.transition()
                     .duration(50)
                     .style("opacity", 0);
-                });
+        });
 
   // create legend
-  var linearScale = d3.scaleLinear()
-      .domain([0, 100])
-      .range([0, 600]);
+  var color;
   d3.select('#mapLegend')
       .selectAll('rect')
       .data(filtered)
       .enter()
       .append('rect')
       .attr('x', function(d) {
-        return linearScale(d);
+        return color(d);
       })
       .attr('width', 300)
       .attr('height', 30)
