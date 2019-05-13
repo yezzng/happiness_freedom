@@ -46,9 +46,11 @@ const requestData = async () => {
     d[ 'HumanFreedomScore' ] = Number( d[ 'HumanFreedomScore' ] );
   });
 
+const minMax = d3.extent(filtered, d => score[d.i]);
+
   //create color scale
   var color = d3.scaleLinear()
-                .domain( [ 1,10 ] )
+                .domain( [ 1, 10 ] )
                 .range( [ '#CDDBF7', '#224499' ] )
                 .clamp( true )
                 .interpolate( d3.interpolateHcl );
@@ -90,7 +92,6 @@ const requestData = async () => {
         });
 
   // create legend
-  var color;
   d3.select('#mapLegend')
       .selectAll('rect')
       .data(filtered)
@@ -102,7 +103,7 @@ const requestData = async () => {
       .attr('width', 300)
       .attr('height', 30)
       .style('fill', function(d) {
-        return colorScale(d);
+        return color(d);
       });
 
   //begin class notes
@@ -121,7 +122,7 @@ const requestData = async () => {
       .attr("x", i)
       .attr("y", 0)
       .attr("width", stepSize)
-      .attr("height",barHeight)
+      .attr("height", barHeight)
       .style("fill", colorScale( pixelScale(i) )); // pixels => countData => color
   };
   //end class notes
