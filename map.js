@@ -92,8 +92,30 @@ const requestData = async () => {
           return colorScale(d);
         });
 
+    const legend = d3.select("#mapLegend");
+    const legendWidth = legend.attr("width");
+    const legendHeight = legend.attr("height");
+    const barHeight = 60;
+    const stepSize = 4;
 
+    const pixelScale = d3.scaleLinear().domain([0,legendWidth-40]).range([minMax[0]-1,minMax[1]+1]);
+    // const barScale = d3.scaleLinear().domain([minMax[0]-1,minMax[1]+1]).range([0,legendWidth-40]);
+    // const barAxis = d3.axisBottom(barScale);
+    // legend.append("g")
+    //   .attr("class", "colorbar axis")
+    //   .attr("transform","translate("+(20)+","+(barHeight+5)+")")
+    //   .call(barAxis);
 
+    //draw rectangles of color down the bar
+    let bar = legend.append("g").attr("transform","translate("+(20)+","+(0)+")")
+    for (let i=0; i<legendWidth-40; i=i+stepSize) {
+      bar.append("rect")
+        .attr("x", i)
+        .attr("y", 0)
+        .attr("width", stepSize)
+        .attr("height",barHeight)
+        .style("fill", colorScale( pixelScale(i) )); // pixels => countData => color
+    };
 
 
     svg.append("path")
