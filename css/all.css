@@ -11,6 +11,10 @@ body {
   font-family: 'Avenir Next';
 }
 
+#mapContainer {
+  margin: auto;
+}
+
 h2 {
   padding: 30px;
   font: #224499;
@@ -19,11 +23,15 @@ h2 {
 
 .button {
   font-family: 'Avenir Next';
+  margin: auto;
+  display: block;
+  width: 40%;
 }
 
 .button:hover {
-  background-color: blue;
+  background-color: #224499;
   color: white;
+
 }
 
 #economicFreedomButton {
@@ -33,11 +41,6 @@ h2 {
 }
 
 #overallFreedomButton {
-}
-
-#overallFreedomButton:hover {
-  background-color: blue;
-  color: white;
 }
 
 svg {
