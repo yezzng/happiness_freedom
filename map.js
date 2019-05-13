@@ -10,7 +10,7 @@ const map = svg.append("g")
 
 const requestData = async () => {
 
-  //loading datasets
+  // load datasets
   const world = await d3.json("../data/world_110m.json");
 
   let filterCountry = ['010', '304'];
@@ -37,7 +37,7 @@ const requestData = async () => {
                                     d[ 'HumanFreedomScore' ] > 0 &&
                                     d[ 'HumanFreedomScore' ].length !== 0 );
 
-
+  // generate counts in order to make a color scale
   var score = [];
   filtered.forEach( (d, i) => {
     score[ i ] = Number( d[ 'HappinessScore' ] );
@@ -53,10 +53,12 @@ const requestData = async () => {
                 .clamp( true )
                 .interpolate( d3.interpolateHcl );
 
+  // create tooltip to show name of the country and scores
   var div2 = d3.select( "body" ).append("div")
         .attr( "class", "tooltip1" )
         .style( "opacity", 1 );
 
+  // mouse on and off for tooltip
   svg.selectAll( "path" ).data( countries.features )
       .enter()
       .append( "path" )
@@ -66,6 +68,8 @@ const requestData = async () => {
       .on( "mousemove", function( d,i ) {
         count = d.id;
         countryf = happy.filter( d => d[ 'Id' ] == count );
+
+        // Give tooltip a label
         countryf.forEach( ( d, i ) => {
           var score = Number( d [ 'HumanFreedomScore' ] );
           var name = d[ 'Country' ];
@@ -74,30 +78,18 @@ const requestData = async () => {
                   .style("left", ( d3.event.pageX ) + "px" )
                   .style( "top", ( d3.event.pageY - 28 ) + "px" );
           })
+
+        //color map with colors
         svg.selectAll( "path" ).style( "fill", ( d,i ) => color( score[ i ] ) );
         })
+
         .on("mouseout", function( d ) {
                 div2.transition()
                     .duration(50)
                     .style("opacity", 0);
                 });
 
-  //generating counts in order to make a color scale
-  // let countryCounts = {};
-  // let idToCountry = {};
-  // filtered.forEach( row => {
-  //   countryCounts[row.name] = 0;
-  //   idToCountry[row.id] = row.name;
-  // })
-  //
-  // const colorScale = d3.scaleQuantize()
-  // .domain( [0, 10] )
-  // .range( ['#00f9ff', '#0051ff']);
-
-  // coloring in map with colors
-  // map.selectAll(".country")
-  //   .style("fill", d => color(d.HumanFreedomScore));
-
+  // create legend
   var linearScale = d3.scaleLinear()
       .domain([0, 100])
       .range([0, 600]);
@@ -140,48 +132,7 @@ const requestData = async () => {
       .datum( countriesMesh )
       .attr( "class", "outline" )
       .attr( "d", path) ;
-
-  // create tooltip to show name of the country and scores
-  var tooltip = d3.select( "#mapContainer" ).append( "div" )
-      .attr( "class", "tooltip" )
-      .style( "opacity", 0 );
-
-  // mouse on and off for tooltip
-  svg.selectAll( 'path' )
-      .on( "mousemove", mouseOnPlot )
-      .on( "mouseout", mouseLeavesPlot )
-      .attr( "name", function( d ) { return d.Country; } );
-
-  var tooltipWidth = parseFloat(tooltip.style("width"));
-  var tooltipHeight = parseFloat(tooltip.style("height"));
-
-
-  function mouseOnPlot() {
-      // Move the tooltip
-      const x = ( event.pageX - ( tooltipWidth / 2.0 ) );
-      const y = ( event.pageY - tooltipHeight - 20 );
-      tooltip.style( "left", x + 'px' );
-      tooltip.style( "top", y + 'px' );
-
-      // Clear tooltip
-      tooltip.html( "" );
-
-      // Give tooltip a label
-      let country = d3.select( this );
-      tooltip.append("div").attr("class", "tooltip-label" ).text( filtered.Country );
-      tooltip.append("div").attr("class", "tooltip-label" ).text( "Happiness Score: " + filtered.HappinessScore );
-      tooltip.append("div").attr("class", "tooltip-label").text( "Freedom Score: " + filtered.HumanFreedomScore )
-
-      const countryName = country.attr( 'name' );
-      tooltip.append( "div" )
-        .attr( "class", "tooltip-content" )
-        .text( countryName );
-  }
-
-  function mouseLeavesPlot() {
-    tooltip.style( "opacity", 0 );
-  }
-
+      
 };
 
 requestData();
