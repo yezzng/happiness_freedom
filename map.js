@@ -35,7 +35,15 @@ const requestData = async () => {
                                     d[ 'HumanFreedomRank' ].length !== 0 &&
                                     d[ 'HumanFreedomScore' ] !== NaN &&
                                     d[ 'HumanFreedomScore' ] > 0 &&
-                                    d[ 'HumanFreedomScore' ].length !== 0 );
+                                    d[ 'HumanFreedomScore' ].length !== 0 &&
+                              //  filtering newly added 
+                                    d[ 'PersonalFreedom' ] !== NaN &&
+                                    d[ 'PersonalFreedom' ] > 0 &&
+                                    d[ 'PersonalFreedom' ].length !== 0 &&
+                                    d[ 'EconomicFreedom' ] !== NaN &&
+                                    d[ 'EconomicFreedom' ] > 0 &&
+                                    d[ 'EconomicFreedom' ].length !== 0  
+                                    );
 
   // generate counts in order to make a color scale
   var score = [];
@@ -44,15 +52,18 @@ const requestData = async () => {
     d[ 'HappinessRank' ] = Number( d[ 'HappinessRank' ] );
     d[ 'HumanFreedomRank' ] = Number( d[ 'HumanFreedomRank' ] );
     d[ 'HumanFreedomScore' ] = Number( d[ 'HumanFreedomScore' ] );
+  // filtering newly added data
+    d[ 'HumanFreedomScore' ] = Number( d[ 'Personalfreedom' ] );
+    d[ 'HumanFreedomScore' ] = Number( d[ 'EconomicFreedom' ] );
   });
 
 
-const minMax = [0, 10];
+const minMax = [1, 10];
 
 
   //create color scale
   var color = d3.scaleLinear()
-                .domain( [ 1, 10 ] )
+                .domain( minMax )
                 .range( [ '#CDDBF7', '#224499' ] );
                 // .clamp( true )
                 // .interpolate( d3.interpolateHcl );
@@ -62,6 +73,10 @@ const minMax = [0, 10];
         .attr( "class", "tooltip1" )
         .style( "opacity", 1 );
 
+
+  //color map
+  // svg.selectAll( ".country" ).style(  "fill", ( d,i ) => color( score[ i ] )  );
+
   // mouse on and off for tooltip
   svg.selectAll( "path" ).data( countries.features )
       .enter()
@@ -70,7 +85,7 @@ const minMax = [0, 10];
       .attr("d", path)
       .style( "fill", ( d,i ) => color( score[ i ] ) )
       .on( "mousemove", function( d,i ) {
-        count = d.id;
+        count = d.Id;
         countryf = happy.filter( d => d[ 'Id' ] == count );
 
         // Give tooltip a label
@@ -83,8 +98,7 @@ const minMax = [0, 10];
                   .style( "top", ( d3.event.pageY - 28 ) + "px" );
           })
 
-        //color map
-        svg.selectAll( "path" ).style( "fill", ( d,i ) => color( score[ i ] ) );
+
         })
 
         .on("mouseout", function( d ) {
@@ -93,22 +107,6 @@ const minMax = [0, 10];
                     .style("opacity", 0);
         });
 
-  // create legend
-  // d3.select('#mapLegend')
-  //     .selectAll('rect')
-  //     .data(filtered)
-  //     .enter()
-  //     .append('rect')
-  //     .attr('x', function(d) {
-  //       return color(d);
-  //     })
-  //     .attr('width', 300)
-  //     .attr('height', 30)
-  //     .style('fill', function(d) {
-  //       return color(d);
-  //     });
-  //
-  // 
   
   // begin class notes
 
@@ -132,8 +130,6 @@ const minMax = [0, 10];
 
   legendBox.append("g")
   .attr("class", "legendAxis")
-  .style("stroke", "white")
-  .style("stroke-width", ".5px")
   .attr("transform", "translate(" + legendMargin.left + "," + legendMargin.top + ")");
   // .call(barAxis);
 
