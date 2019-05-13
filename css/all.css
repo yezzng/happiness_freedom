@@ -1,5 +1,6 @@
 header {
   padding: 0px;
+  margin: 10px
   font-family: 'Avenir Next';
   color: #224499;
   background-color: none;
@@ -7,47 +8,57 @@ header {
   text-align: center;
 }
 
+h1 {
+  margin: 50px;
+}
+
 body {
   font-family: 'Avenir Next';
 }
 
 #mapContainer {
-  margin: auto;
+  text-align: center;
 }
 
 h2 {
-  padding: 30px;
+  padding: 5px;
   font: #224499;
   text-align: center;
+  margin: 10px;
 }
 
 .button {
   font-family: 'Avenir Next';
-  margin: auto;
-  display: block;
-  width: 12%;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: white;
+  color: #224499;
+  border-color: #224499;
+  border-radius: 5px;
+  border-width: 2px;
+  width: 10%;
+  height: 150%;
+  padding: 5px;
 }
 
 .button:hover {
   background-color: #224499;
   color: white;
-
 }
 
 #economicFreedomButton {
-  float: left;
+  margin: 10px;
 }
 
 #overallFreedomButton {
-  float: right;
+  margin: 10px;
 }
 
 #humanFreedomButton {
-  margin: 0 auto;
+  margin: 10px;
 }
 
-svg {
-  display: block;
+map {
   margin: 0 auto;
 }
 
