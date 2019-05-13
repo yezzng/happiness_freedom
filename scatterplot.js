@@ -65,7 +65,7 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
       .attr( "font-size", "14px" )
       .attr( "text-anchor", "middle" )
       .attr( "transform", "rotate( -90 ) " )
-      .text( "Human Freedom Score" );
+      .text( "Freedom Score" );
 
   // tooltip
   var div1 = d3.select( "body" ).append( "div" )
