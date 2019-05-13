@@ -17,25 +17,27 @@ h2 {
   text-align: center;
 }
 
-#economicFreedomButton {
+.button {
+  font-family: 'Avenir Next';
 }
 
-#economicFreedomButton:active {
-  color: blue;
+.button:hover {
+  background-color: blue;
+  color: white;
+}
+
+#economicFreedomButton {
 }
 
 #humanFreedomButton {
 }
 
-#humanFreedomButton:active {
-  color: red;
-}
-
 #overallFreedomButton {
 }
 
-#overallFreedomButton:active {
-  color: blue;
+#overallFreedomButton:hover {
+  background-color: blue;
+  color: white;
 }
 
 svg {
