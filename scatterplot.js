@@ -164,10 +164,6 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
 
   });
 
-  // .on("click",
-  //   regionText.style( "background-color", regionScale( d ) )
-  //             .style( "color", "white" ))
-
   d3.select("#resetButton").on("click", function() {
             scatter.selectAll("circle").attr("opacity", 0.9);
   });
