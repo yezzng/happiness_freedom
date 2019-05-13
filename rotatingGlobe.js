@@ -1,7 +1,7 @@
-const width1 = 960;
-            const height1 = 500;
+const width1 = 1000;
+            const height1 = 600;
           	const config = {
-              speed: 0.005,
+              speed: 0.05,
               verticalTilt: -10,
               horizontalTilt: 0
             }
@@ -188,7 +188,15 @@ function draw(){
           tooltip.style("opacity", 0);
         }
 
+        const graticule = d3.geoGraticule()
+        .step([10, 10]);
 
+    svg2.append("path")
+        .datum(graticule)
+        .attr("class", "graticule")
+        .attr("d", path)
+        .style("opacity",0.5)
+        .style("stroke", "#ccc");
 
 
 
@@ -196,15 +204,7 @@ function draw(){
     requestData();
 
 
-                const graticule = d3.geoGraticule()
-                    .step([10, 10]);
-
-                svg2.append("path")
-                    .datum(graticule)
-                    .attr("class", "graticule")
-                    .attr("d", path)
-                    .style("opacity",0.5)
-                    .style("stroke", "#ccc");
+              
 
             }
 
@@ -212,6 +212,6 @@ function draw(){
                 d3.timer(function (elapsed) {
                     projection.rotate([config.speed * elapsed - 120, config.verticalTilt, config.horizontalTilt]);
                     svg2.selectAll("path").attr("d", path);
-                   draw();
+                 
                 });
             }
