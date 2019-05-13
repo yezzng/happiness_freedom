@@ -16,26 +16,26 @@
 </head>
 
 <body>
+
   <header>
     <h1 align="center"> Does freedom bring you happiness? </h1>
   </header>
+
   <div id = "mapContainer">
-    <h2 align="center">How free are people across the world? </h2>
-    <button onclick="changeColor('blue')">Economic Freedom</button>
-    <button onclick="changeColor('red')">Human Freedom</button>
-    <button onclick="changeColor('blue')">Overall Freedom</button>
+    <h2>How free are people across the world? </h2>
+    <button id = "economicFreedomButton">Economic Freedom</button>
+    <button id = "humanFreedomButton">Human Freedom</button>
+    <button id = "overallFreedomButton">Overall Freedom</button>
     <svg id = "map" width = "962" height = "600"></svg>
     <svg id="mapLegend"> </svg>
+  </div>
 
-    <center>
-    <h2> Does freedom have anything to do with happiness?</font> </h2>
-    </center>
-    <!--<h2 align="center"> Does freedom have anything to do with happiness? </h2>-->
-    <div class="row">
-    <div class="column">
-        <svg id="scatterplot" height="500" width="500" style="background: #fff; margin-top:50px" ></svg>
+  <div id = "scatterPlotContainer">
+    <h2>Does freedom have anything to do with happiness?</h2>
+    <div class = "row">
+    <div class = "column">
+      <svg id="scatterplot" height="500" width="500" style="background: #fff; margin-top:50px" ></svg>
     </div>
-
     <div id="simpleLegend">
         <input type="checkbox" id="box1" >Central and Eastern Europe</input><br>
         <input type="checkbox" id="box2" >Middle East and Northern Africa</input><br>
@@ -50,15 +50,14 @@
     </div>
 
     </div>
-    <script type="text/javascript"  src="/map.js"></script>
-    <script type="text/javascript"  src="/scatterplot.js"></script>
-
+      <script type="text/javascript" src="/map.js"></script>
+      <script type="text/javascript" src="/scatterplot.js"></script>
     </div>
+
 </body>
 
-
 <footer>
-  <p align="center">
+  <p>
     INFO 5100 Project <br>
     Varunie Bajpai, Yejeong Choi, Weiyi Hou, Kathy Wang <br>
     Copyright &copy; 2019 <br>

@@ -38,6 +38,7 @@ body {
 h2 {
   padding: 30px;
   font: #224499;
+  text-align: center;
 }
 
 simpleLegend {
@@ -115,4 +116,29 @@ div.tooltip1 {
 
 body {
 background-color: none;
+}
+
+#economicFreedomButton {
+}
+
+#economicFreedomButton:active {
+  color: blue;
+}
+
+#humanFreedomButton {
+}
+
+#humanFreedomButton:active {
+  color: red;
+}
+
+#overallFreedomButton {
+}
+
+#overallFreedomButton:active {
+  color: blue;
+}
+
+p {
+  text-align: center; 
 }
