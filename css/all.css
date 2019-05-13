@@ -110,7 +110,6 @@ svg {
 
 .mapGroup {
   float: right;
-  padding-top: 120px;
   padding-right: 100px;
 }
 
@@ -124,11 +123,12 @@ svg {
 }
 
 #legendText:hover {
-  color: white;
+  background-color: #224499;
+  color: white; 
 }
 
 #resetButton {
-  float: left;
+  float: right;
   font-family: 'Avenir Next';
   font-size: 15px;
   background-color: white;
