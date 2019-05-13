@@ -124,14 +124,14 @@ const minMax = [1, 10];
 
   const pixelScale = d3.scaleLinear().domain([0,legendWidth]).range([minMax[0],minMax[1]]);
   const barScale = d3.scaleLinear().domain(minMax[0], minMax[1]).range([0, legendWidth]);
-  // const barAxis = d3.axisBottom(barScale);
+
 
   legendBox.html("");
 
   legendBox.append("g")
   .attr("class", "legendAxis")
   .attr("transform", "translate(" + legendMargin.left + "," + legendMargin.top + ")");
-  // .call(barAxis);
+
 
   //draw rectangles
   let bar = legendBox.append("g").attr("transform","translate("+(30)+","+(10)+")")
