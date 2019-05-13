@@ -18,7 +18,7 @@ const width1 = 960;
             draw();
 
 function draw(){
-    let svg = d3.select("#map");
+    let svg = d3.select("#map2");
     let width = svg.attr("width");
     let height = svg.attr("height");
     let margin = { top: 30, right: 20, bottom: 10, left: 20
@@ -82,7 +82,17 @@ function draw(){
             .append("path")
             .attr("class", "country")
             .attr("d", path)
-
+            .style( "fill",function( d,i ) {
+              count = d.id;
+              countryf = filtered.filter( d => d[ 'Id' ] == count );
+              var score=[];
+              // Give tooltip a label
+              countryf.forEach( ( d, i ) => {
+                score =  d [ 'HumanFreedomScore' ];
+      
+              })
+              return color(score);
+               }) //coloring the map
             .on("mouseover", function(d,i) {
                 count=d.id;
 
@@ -101,7 +111,7 @@ function draw(){
                   div2.html("Country: "+name+ "<br/>"+"Freedom Score: "+score)
                   .style("left", (d3.event.pageX) + "px")
                   .style("top", (d3.event.pageY - 28) + "px");})
-                  svg.selectAll("path").style("fill", (d,i) => color(score[i]));
+                
                 })
             .on("mouseout", function(d) {
                 div2.transition()
@@ -128,26 +138,7 @@ function draw(){
         map.selectAll(".country")
           .style("fill", d => color(d.HumanFreedomScore));
 
-        var linearScale = d3.scaleLinear()
-            .domain([0, 100])
-            .range([0, 600]);
-        d3.select('#mapLegend')
-            .selectAll('rect')
-            .data(filtered)
-            .enter()
-            .append('rect')
-            .attr('x', function(d) {
-              return linearScale(d);
-            })
-            .attr('width', 300)
-            .attr('height', 30)
-            .style('fill', (d,i) => color(score[i])
-            );
-
-        svg.append("path")
-            .datum(countriesMesh)
-            .attr("class", "outline")
-            .attr("d", path);
+       
 
 
 
