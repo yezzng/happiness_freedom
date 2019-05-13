@@ -117,7 +117,7 @@ const minMax = [1, 10];
   const barHeight = 60;
   const stepSize = 4;
 
-  let legendMargin = { top: 40, right: 10, bottom: 20, left: 10 };
+  let legendMargin = { top: 0, right: 10, bottom: 10, left: 10 };
 
   const legendWidth = legendBoxWidth - legendMargin.left - legendMargin.right;
   const legendHeight = legendBoxHeight - legendMargin.top - legendMargin.bottom;
