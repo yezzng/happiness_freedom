@@ -30,22 +30,22 @@ const requestData = async () => {
   var path = d3.geoPath().projection( projection );
 
   // clean up data
-  var filtered = happy.filter(d => d[ 'HumanFreedomRank' ] !== NaN &&
+  var filtered = happy.filter(d => d[ 'HumanFreedomRank' ] !== "N/A" &&
                                     d[ 'HumanFreedomRank' ] > 0 &&
                                     d[ 'HumanFreedomRank' ].length !== 0 &&
-                                    d[ 'HumanFreedomScore' ] !== NaN &&
+                                    d[ 'HumanFreedomScore' ] !== "N/A" &&
                                     d[ 'HumanFreedomScore' ] > 0 &&
                                     d[ 'HumanFreedomScore' ].length !== 0 &&
                               //  filtering newly added
-                                    d[ 'PersonalFreedom' ] !== NaN &&
+                                    d[ 'PersonalFreedom' ] !== "N/A" &&
                                     d[ 'PersonalFreedom' ] > 0 &&
                                     d[ 'PersonalFreedom' ].length !== 0 &&
-                                    d[ 'EconomicFreedom' ] !== NaN &&
+                                    d[ 'EconomicFreedom' ] !== "N/A" &&
                                     d[ 'EconomicFreedom' ] > 0 &&
                                     d[ 'EconomicFreedom' ].length !== 0
                                     );
 
-  // generate counts in order to make a color scale
+
   var score = [];
   filtered.forEach( (d, i) => {
     score[ i ] = Number( d[ 'HappinessScore' ] );
@@ -56,6 +56,7 @@ const requestData = async () => {
     d[ 'HumanFreedomScore' ] = Number( d[ 'Personalfreedom' ] );
     d[ 'HumanFreedomScore' ] = Number( d[ 'EconomicFreedom' ] );
   });
+
 
 
 const minMax = [1, 10];
@@ -84,11 +85,11 @@ const minMax = [1, 10];
       .style( "fill", ( d,i ) => color( score[ i ] ) ) //coloring the map
       .on( "mousemove", function( d,i ) {
         count = d.id;
-        countryf = happy.filter( d => d[ 'Id' ] == count );
+        countryf = filtered.filter( d => d[ 'Id' ] == count );
 
         // Give tooltip a label
         countryf.forEach( ( d, i ) => {
-          var score = Number( d [ 'HumanFreedomScore' ] );
+          var score =  d [ 'HumanFreedomScore' ];
           var name = d[ 'Country' ];
           div2.style( "opacity", .9 );
           div2.html( "Country: " + name + "<br/>" + "Freedom Score: " + score )
