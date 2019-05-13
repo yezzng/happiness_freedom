@@ -152,6 +152,7 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
             }
         })
       })
+      .append('br');
   });
 
 })
