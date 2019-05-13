@@ -111,50 +111,47 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
         );
   });
 
-        // create check boxes
-        let box1 = d3.select("checkbox#box1");
-        let box2 = d3.select("checkbox#box2");
-        let box3 = d3.select("checkbox#box3");
-        let box4 = d3.select("checkbox#box4");
-        let box5 = d3.select("checkbox#box5");
-        let box6 = d3.select("checkbox#box6");
-        let box7 = d3.select("checkbox#box7");
-        let box8 = d3.select("checkbox#box8");
-        let box9 = d3.select("checkbox#box9");
-        let box10 = d3.select("checkbox#box10");
+  // create check boxes
+  let box1 = d3.select("checkbox#box1");
+  let box2 = d3.select("checkbox#box2");
+  let box3 = d3.select("checkbox#box3");
+  let box4 = d3.select("checkbox#box4");
+  let box5 = d3.select("checkbox#box5");
+  let box6 = d3.select("checkbox#box6");
+  let box7 = d3.select("checkbox#box7");
+  let box8 = d3.select("checkbox#box8");
+  let box9 = d3.select("checkbox#box9");
+  let box10 = d3.select("checkbox#box10");
 
-        // // If the data set’s region of the country = user-selected region
-        // // AND country freedomRank is 1, 2, or 3, then print the country
-        // //var userInput = document.getElementById("box1");
-        // //var userInputCountry = "Albania";
-        // console.log(filtered);
-        // console.log(filtered[1]["Region"]);
-        // if ( userInput === filtered["Region"] &&
-        //     ( d["HumanFreedomRank"] === 1 ||
-        //     d["HumanFreedomRank"] === 2 ||
-        //     d["HumanFreedomRank"] === 3 )) {
-        //   console.log( d["Country"]);
-        // }
+  // // If the data set’s region of the country = user-selected region
+  // // AND country freedomRank is 1, 2, or 3, then print the country
+  // //var userInput = document.getElementById("box1");
+  // //var userInputCountry = "Albania";
+  // console.log(filtered);
+  // console.log(filtered[1]["Region"]);
+  // if ( userInput === filtered["Region"] &&
+  //     ( d["HumanFreedomRank"] === 1 ||
+  //     d["HumanFreedomRank"] === 2 ||
+  //     d["HumanFreedomRank"] === 3 )) {
+  //   console.log( d["Country"]);
+  // }
 
-        // Regions
-        regionScale.domain().forEach(function(d,i) {
-          d3.select("#simpleLegend")
-            .append("span").text(d)
-            .style("color", regionScale(d))
-            .on("mouseover", function() {
-              scatter.selectAll("circle").each(function() {
-                let circle = d3.select(this);
-                if (circle.attr("region") === d) {
-                  circle.attr("opacity", 0.9);
-                }
-                else {
-                  circle.attr("opacity", 0.1);
-                }
-              })
-            })
-        });
-
-
-
-
+  // Regions
+  regionScale.domain().forEach( function( d,i ) {
+    d3.select( "#simpleLegend" )
+      .append( "span" ).text( d )
+      .style( "color", regionScale( d ) )
+      .on( "mouseover", function() {
+          scatter.selectAll( "circle" ).each( function() {
+            let circle = d3.select( this );
+            if ( circle.attr( "region" ) === d ) {
+              circle.attr("opacity", 0.9);
+            }
+            else {
+              circle.attr( "opacity", 0.1 );
+            }
         })
+      })
+  });
+
+})
