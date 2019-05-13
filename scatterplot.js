@@ -140,11 +140,19 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
 
   // Regions
   regionScale.domain().forEach( function( d,i ) {
-    d3.select( "#simpleLegend" )
-      .append( "p" ).text( d )
-      .attr("id", "legendText")
+    var regionText = d3.select( "#simpleLegend" )
+                        .append( "p" ).text( d )
+                        .attr("id", "legendText");
+      regionText.on( "mouseover", function() {
+        regionText.style( "background-color", regionScale( d ) );
+        regionText.style( "color", "white" );
+      } );
+      regionText.on( "mouseout", function() {
+        regionText.style( "background-color", "white" );
+        regionText.style( "color", regionScale( d ) );
+      })
       .style( "color", regionScale( d ) )
-      .on( "mouseover", function() {
+      .on( "click", function() {
           scatter.selectAll( "circle" ).each( function() {
             let circle = d3.select( this );
             if ( circle.attr( "region" ) === d ) {
@@ -155,6 +163,7 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
                   //  .on("mouseover", "");
             }
         })
+
       })
       .append('br');
   });
