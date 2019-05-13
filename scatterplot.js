@@ -141,7 +141,8 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
   // Regions
   regionScale.domain().forEach( function( d,i ) {
     d3.select( "#simpleLegend" )
-      .append( "span" ).text( d )
+      .append( "p" ).text( d )
+      .attr("id", "legendText")
       .style( "color", regionScale( d ) )
       .on( "mouseover", function() {
           scatter.selectAll( "circle" ).each( function() {

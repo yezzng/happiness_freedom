@@ -108,8 +108,8 @@ const minMax = [0, 10];
   //       return color(d);
   //     });
   //
-  // 
-  
+  //
+
   // begin class notes
 
   // create legend
@@ -145,7 +145,7 @@ const minMax = [0, 10];
       .attr("y", 0)
       .attr("width", stepSize)
       .attr("height", barHeight)
-      .style("fill", color( pixelScale(i) )); 
+      .style("fill", color( pixelScale(i) ));
   }
 
   const newLocal = svg.append( "path" )
@@ -153,7 +153,7 @@ const minMax = [0, 10];
       .attr( "class", "outline" )
       .attr( "d", path) ;
 
-      
+
 };
 
 requestData();
