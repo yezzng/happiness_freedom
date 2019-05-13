@@ -48,12 +48,12 @@ const requestData = async () => {
 
   //create legend
   var color = d3.scaleLinear()
-  .domain([1,10])
-  .range(['#CDDBF7', '#224499'])
-  .clamp(true)
-  .interpolate(d3.interpolateHcl);
+                .domain( [ 1,10 ] )
+                .range( [ '#CDDBF7', '#224499' ] )
+                .clamp( true )
+                .interpolate( d3.interpolateHcl );
 
-  var div2 = d3.select("body").append("div")
+  var div2 = d3.select( "body" ).append("div")
         .attr("class", "tooltip1")
         .style("opacity", 1);
 
