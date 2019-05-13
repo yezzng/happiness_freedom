@@ -115,7 +115,25 @@ svg {
 }
 
 span text {
-  margin: 20px; 
+  margin: 20px;
+}
+
+#resetButton {
+  float: left;
+  font-family: 'Avenir Next';
+  font-size: 15px;
+  background-color: white;
+  color: #224499;
+  width: 50px;
+  border-style: solid;
+  border-color: #224499;
+  border-radius: 5px;
+  border-width: 2px;
+}
+
+#resetButton:hover {
+  background-color: #224499;
+  color: white;
 }
 
 .column a {

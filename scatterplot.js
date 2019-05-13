@@ -150,11 +150,16 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
               circle.attr("opacity", 0.9);
             }
             else {
-              circle.attr( "opacity", 0.1 );
+              circle.attr( "opacity", 0.1 )
+                  //  .on("mouseover", "");
             }
         })
       })
       .append('br');
+  });
+
+  d3.select("#resetButton").on("click", function() {
+            scatter.selectAll("circle").attr("opacity", 0.9);
   });
 
 })
