@@ -46,21 +46,21 @@ const requestData = async () => {
     d[ 'HumanFreedomScore' ] = Number( d[ 'HumanFreedomScore' ] );
   });
 
-  //create legend
+  //create color scale
   var color = d3.scaleLinear()
-  .domain([1,10])
-  .range(['#CDDBF7', '#224499'])
-  .clamp(true)
-  .interpolate(d3.interpolateHcl);
+                .domain( [ 1,10 ] )
+                .range( [ '#CDDBF7', '#224499' ] )
+                .clamp( true )
+                .interpolate( d3.interpolateHcl );
 
-  var div2 = d3.select("body").append("div")
-        .attr("class", "tooltip1")
-        .style("opacity", 1);
+  var div2 = d3.select( "body" ).append("div")
+        .attr( "class", "tooltip1" )
+        .style( "opacity", 1 );
 
-  svg.selectAll("path").data(countries.features)
+  svg.selectAll( "path" ).data( countries.features )
       .enter()
-      .append("path")
-      .attr("class", "country")
+      .append( "path" )
+      .attr( "class", "country" )
       .attr("d", path)
       .style("fill", (d,i) => color(score[i]))
       .on("mousemove", function(d,i) {
@@ -87,16 +87,16 @@ const requestData = async () => {
               .style("opacity", 0);});
 
   //generating counts in order to make a color scale
-  let countryCounts = {};
-  let idToCountry = {};
-  filtered.forEach( row => {
-    countryCounts[row.name] = 0;
-    idToCountry[row.id] = row.name;
-  })
-
-  const colorScale = d3.scaleQuantize()
-  .domain( [0, 10] )
-  .range( ['#00f9ff', '#0051ff']);
+  // let countryCounts = {};
+  // let idToCountry = {};
+  // filtered.forEach( row => {
+  //   countryCounts[row.name] = 0;
+  //   idToCountry[row.id] = row.name;
+  // })
+  //
+  // const colorScale = d3.scaleQuantize()
+  // .domain( [0, 10] )
+  // .range( ['#00f9ff', '#0051ff']);
 
   // coloring in map with colors
   // map.selectAll(".country")
