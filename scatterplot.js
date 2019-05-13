@@ -38,12 +38,12 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
   const regionScale = d3.scaleOrdinal( d3.schemeCategory10 );
 
   let leftAxis = d3.axisLeft( freeScale) ;
-  svg.append( "g" ).attr( "class", "y axis" )
+  svg.append( "g" ).attr( "class", "y grid" )
     .attr( "transform","translate( "+ ( margin.left-10 ) +","+ ( margin.top ) +" ) " )
     .call( leftAxis );
 
   let bottomAxis = d3.axisBottom( happyScale ).ticks( 10 );
-  let element = svg.append( "g" ).attr( "class", "x axis" )
+  let element = svg.append( "g" ).attr( "class", "x grid" )
     .attr( "transform","translate( "+ ( margin.left ) +","+ ( margin.top + chartHeight + 10 ) +" ) " );
   bottomAxis( element );
 
@@ -61,7 +61,7 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
   svg.append( "text" )
       .attr( "class", "humidity" )
       .attr( "x", - chartHeight / 2 )
-      .attr( "y", 10 )
+      .attr( "y", 20 )
       .attr( "font-size", "14px" )
       .attr( "text-anchor", "middle" )
       .attr( "transform", "rotate( -90 ) " )
