@@ -92,21 +92,23 @@ const minMax = d3.extent(filtered, d => score[d.i]);
         });
 
   // create legend
-  d3.select('#mapLegend')
-      .selectAll('rect')
-      .data(filtered)
-      .enter()
-      .append('rect')
-      .attr('x', function(d) {
-        return color(d);
-      })
-      .attr('width', 300)
-      .attr('height', 30)
-      .style('fill', function(d) {
-        return color(d);
-      });
+  // d3.select('#mapLegend')
+  //     .selectAll('rect')
+  //     .data(filtered)
+  //     .enter()
+  //     .append('rect')
+  //     .attr('x', function(d) {
+  //       return color(d);
+  //     })
+  //     .attr('width', 300)
+  //     .attr('height', 30)
+  //     .style('fill', function(d) {
+  //       return color(d);
+  //     });
+  //
+  // //begin class notes
 
-  //begin class notes
+  // create legend
   const legend = d3.select("#mapLegend");
   const legendWidth = legend.attr("width");
   const legendHeight = legend.attr("height");
@@ -125,7 +127,6 @@ const minMax = d3.extent(filtered, d => score[d.i]);
       .attr("height", barHeight)
       .style("fill", colorScale( pixelScale(i) )); // pixels => countData => color
   };
-  //end class notes
 
   const newLocal = svg.append( "path" )
       .datum( countriesMesh )
