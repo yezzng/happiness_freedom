@@ -114,11 +114,13 @@ svg {
   padding-right: 100px;
 }
 
+span text {
+  margin: 20px; 
+}
 
 .column a {
   text-align: center;
 }
- 
 
 footer {
   padding: 100px;
