@@ -90,8 +90,10 @@ const minMax = [1, 10];
         countryf.forEach( ( d, i ) => {
           var score =  d [ 'HumanFreedomScore' ];
           var name = d[ 'Country' ];
+          var rank = d[ 'HumanFreedomRank' ] ;
           div2.style( "opacity", .9 );
-          div2.html( "Country: " + name + "<br/>" + "Freedom Score: " + score )
+          div2.html( "Country: " + name + "<br/>" + "Freedom Score: " + score 
+          + "<br/>" + "Freedom Rank: " + rank )
                   .style("left", ( d3.event.pageX + 9 ) + "px" )
                   .style( "top", ( d3.event.pageY - 40 ) + "px" );
           })
