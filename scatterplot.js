@@ -1,9 +1,9 @@
 d3.csv("../data/2015happyFreedom.csv").then( function(data) {
 
-  var filtered = data.filter( d => d[ 'HumanFreedomRank' ] !== NaN &&
+  var filtered = data.filter( d => d[ 'HumanFreedomRank' ] !== "N/A" &&
                                     d[ 'HumanFreedomRank' ] > 0 &&
                                     d[ 'HumanFreedomRank' ].length !== 0 &&
-                                    d[ 'HumanFreedomScore' ] !== NaN &&
+                                    d[ 'HumanFreedomScore' ] !== "N/A" &&
                                     d[ 'HumanFreedomScore' ] > 0 &&
                                     d[ 'HumanFreedomScore' ].length !== 0);
 
