@@ -54,26 +54,21 @@ const requestData = async () => {
                 .interpolate( d3.interpolateHcl );
 
   var div2 = d3.select( "body" ).append("div")
-        .attr("class", "tooltip1")
-        .style("opacity", 1);
+        .attr( "class", "tooltip1" )
+        .style( "opacity", 1 );
 
-  svg.selectAll("path").data(countries.features)
+  svg.selectAll( "path" ).data( countries.features )
       .enter()
-      .append("path")
-      .attr("class", "country")
+      .append( "path" )
+      .attr( "class", "country" )
       .attr("d", path)
-      .style("fill", (d,i) => color(score[i]))
-      .on("mousemove", function(d,i) {
-
-        count=d.id;
-
-
-                countryf= happy.filter(d => d['Id']==count);
-       //         console.log("contry"+JSON.stringify(countryf));
-                countryf.forEach( (d, i) => {
-                 var score = Number(d['HumanFreedomScore']);
-                var  name=d['Country'];
-               //   id[i]=Number(d['Id']);
+      .style( "fill", ( d,i ) => color( score[ i ] ) )
+      .on( "mousemove", function( d,i ) {
+        count = d.id;
+        countryf = happy.filter( d => d[ 'Id' ] == count );
+        countryf.forEach( ( d, i ) => {
+          var score = Number( d [ 'HumanFreedomScore' ] );
+          var name = d[ 'Country' ];
 
                 div2
                   .style("opacity", .9);
