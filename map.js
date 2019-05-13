@@ -81,7 +81,7 @@ const minMax = [1, 10];
       .append( "path" )
       .attr( "class", "country" )
       .attr("d", path)
-      .style( "fill", ( d,i ) => color( score[ i ] ) )
+      .style( "fill", ( d,i ) => color( score[ i ] ) ) //coloring the map
       .on( "mousemove", function( d,i ) {
         count = d.id;
         countryf = happy.filter( d => d[ 'Id' ] == count );
@@ -95,8 +95,8 @@ const minMax = [1, 10];
                   .style("left", ( d3.event.pageX ) + "px" )
                   .style( "top", ( d3.event.pageY - 28 ) + "px" );
           })
-//color map
-  svg.selectAll( ".country" ).style(  "fill", ( d,i ) => color( score[ i ] )  );
+//color map -> not really
+  // svg.selectAll( ".country" ).style(  "fill", ( d,i ) => color( score[ i ] )  );
 
 
         })
