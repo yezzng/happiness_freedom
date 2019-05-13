@@ -46,14 +46,16 @@ const requestData = async () => {
     d[ 'HumanFreedomScore' ] = Number( d[ 'HumanFreedomScore' ] );
   });
 
-const minMax = d3.extent(filtered, d => score[d.i]);
+
+const minMax = [0, 10];
+
 
   //create color scale
   var color = d3.scaleLinear()
                 .domain( [ 1, 10 ] )
-                .range( [ '#CDDBF7', '#224499' ] )
-                .clamp( true )
-                .interpolate( d3.interpolateHcl );
+                .range( [ '#CDDBF7', '#224499' ] );
+                // .clamp( true )
+                // .interpolate( d3.interpolateHcl );
 
   // create tooltip to show name of the country and scores
   var div2 = d3.select( "body" ).append("div")
@@ -106,32 +108,52 @@ const minMax = d3.extent(filtered, d => score[d.i]);
   //       return color(d);
   //     });
   //
-  // //begin class notes
+  // 
+  
+  // begin class notes
 
   // create legend
-  const legend = d3.select("#mapLegend");
-  const legendWidth = legend.attr("width");
-  const legendHeight = legend.attr("height");
+  const legendBox = d3.select("#mapLegend");
+  const legendBoxWidth = legendBox.attr("width");
+  const legendBoxHeight = legendBox.attr("height");
   const barHeight = 60;
   const stepSize = 4;
 
-  const pixelScale = d3.scaleLinear().domain([0,legendWidth-40]).range([minMax[0]-1,minMax[1]+1]);
+  let legendMargin = { top: 40, right: 10, bottom: 20, left: 10 };
 
-  //draw rectangles of color down the bar
-  let bar = legend.append("g").attr("transform","translate("+(20)+","+(0)+")")
+  const legendWidth = legendBoxWidth - legendMargin.left - legendMargin.right;
+  const legendHeight = legendBoxHeight - legendMargin.top - legendMargin.bottom;
+
+  const pixelScale = d3.scaleLinear().domain([0,legendWidth]).range([minMax[0],minMax[1]]);
+  const barScale = d3.scaleLinear().domain(minMax[0], minMax[1]).range([0, legendWidth]);
+  // const barAxis = d3.axisBottom(barScale);
+
+  legendBox.html("");
+
+  legendBox.append("g")
+  .attr("class", "legendAxis")
+  .style("stroke", "white")
+  .style("stroke-width", ".5px")
+  .attr("transform", "translate(" + legendMargin.left + "," + legendMargin.top + ")");
+  // .call(barAxis);
+
+  //draw rectangles
+  let bar = legendBox.append("g").attr("transform","translate("+(30)+","+(10)+")")
   for (let i=0; i<legendWidth-40; i=i+stepSize) {
     bar.append("rect")
       .attr("x", i)
       .attr("y", 0)
       .attr("width", stepSize)
       .attr("height", barHeight)
-      .style("fill", colorScale( pixelScale(i) )); // pixels => countData => color
-  };
+      .style("fill", color( pixelScale(i) )); 
+  }
 
   const newLocal = svg.append( "path" )
       .datum( countriesMesh )
       .attr( "class", "outline" )
       .attr( "d", path) ;
+
+      
 };
 
 requestData();
