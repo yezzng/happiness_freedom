@@ -1,34 +1,10 @@
-/* svg.mapSVG {
-  margin-left: 5%;
-  background-color: rgb(23, 52, 77);
-} */
-
-/* #map {
-  max-width: 50%;
-  position: absolute;
-} */
-
-/* #mapText {
-  position: absolute;
-  text-align: center;
-  float: right;
-  right: 5%;
-  border-radius:10px;
-  padding: 2%;
-  background-color: rgba(255, 255, 255, 0.164);
-  color: white;
-  width: 240px;
-} */
-
-
-/* header */
-
 header {
   padding: 0px;
   font-family: 'Avenir Next';
-  color:#224499;
+  color: #224499;
   background-color: none;
   font-size: 150%;
+  text-align: center;
 }
 
 body {
@@ -39,83 +15,6 @@ h2 {
   padding: 30px;
   font: #224499;
   text-align: center;
-}
-
-simpleLegend {
-  text-align: center;
-}
-/* footer */
-
-footer {
-  padding: 100px;
-  background-color:#FFFFFF;
-  color: #224499;
-  line-height: 28px;
-}
-
-footer a {
-  color: #224499;
-
-}
-
-/* scatter plot */
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-}
-
-.column a {
-  /* width: 40%; */
-  text-align: center;
-}
-
-svg {
-  display: block;
-  margin: 0 auto;
-}
-div.tooltip1 {
-    position: absolute;
-    text-align: center;
-    width: auto;
-    height: auto;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: burlywood;
-    border: 0px;
-    border-radius: 8px;
-    pointer-events: none;
-}
-.country {
-            fill: lightgrey;
-            stroke: none;
-            }
-
-   .outline{
-            stroke: black;
-            stroke-width: 1px;
-             fill: none;
-            }
-  .graticule {
-              fill: none;
-              stroke:  lightgrey ;
-               }
-
-  .districts{
-            stroke: white;
-            stroke-width: 1px;
-             fill: none;
-            }
-
-body {
-background-color: none;
 }
 
 #economicFreedomButton {
@@ -139,6 +38,66 @@ background-color: none;
   color: blue;
 }
 
+svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.country {
+  fill: lightgrey;
+  stroke: none;
+}
+
+.outline{
+  stroke: black;
+  stroke-width: 1px;
+  fill: none;
+}
+
+.graticule {
+  fill: none;
+  stroke:  lightgrey ;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  height: auto;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: burlywood;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.column a {
+  text-align: center;
+}
+
+#scatterplotLegend {
+}
+
+footer {
+  padding: 100px;
+  background-color:#FFFFFF;
+  color: #224499;
+  line-height: 28px;
+}
+
 p {
-  text-align: center; 
+  text-align: center;
 }
