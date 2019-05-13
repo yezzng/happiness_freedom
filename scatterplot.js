@@ -38,13 +38,13 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
   const regionScale = d3.scaleOrdinal( d3.schemeCategory10 );
 
   let leftAxis = d3.axisLeft( freeScale) ;
-  svg.append( "g" ).attr( "class", "y grid" )
-    .attr( "transform","translate( "+ ( margin.left-10 ) +","+ ( margin.top ) +" ) " )
+  svg.append( "g" ).attr( "class", "grid" )
+    .attr( "transform","translate( "+ ( margin.left ) +","+ ( margin.top ) +" ) " )
     .call( leftAxis );
 
   let bottomAxis = d3.axisBottom( happyScale ).ticks( 10 );
-  let element = svg.append( "g" ).attr( "class", "x grid" )
-    .attr( "transform","translate( "+ ( margin.left ) +","+ ( margin.top + chartHeight + 10 ) +" ) " );
+  let element = svg.append( "g" ).attr( "class", "grid" )
+    .attr( "transform","translate( "+ ( margin.left ) +","+ ( margin.top + chartHeight ) +" ) " );
   bottomAxis( element );
 
   // labels

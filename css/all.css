@@ -173,3 +173,10 @@ footer {
 p {
   text-align: center;
 }
+
+.grid line {
+  stroke: lightgrey;
+}
+.grid path {
+    stroke-width: 0.5;
+}
