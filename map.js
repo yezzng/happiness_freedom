@@ -89,16 +89,16 @@ const requestData = async () => {
                   .style("opacity", 0);});
 
   //generating counts in order to make a color scale
-  let countryCounts = {};
-  let idToCountry = {};
-  filtered.forEach( row => {
-    countryCounts[row.name] = 0;
-    idToCountry[row.id] = row.name;
-  })
-
-  const colorScale = d3.scaleQuantize()
-  .domain( [0, 10] )
-  .range( ['#00f9ff', '#0051ff']);
+  // let countryCounts = {};
+  // let idToCountry = {};
+  // filtered.forEach( row => {
+  //   countryCounts[row.name] = 0;
+  //   idToCountry[row.id] = row.name;
+  // })
+  //
+  // const colorScale = d3.scaleQuantize()
+  // .domain( [0, 10] )
+  // .range( ['#00f9ff', '#0051ff']);
 
   // coloring in map with colors
   // map.selectAll(".country")
