@@ -23,12 +23,13 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
 
   var g = svg.append("g").attr( "transform","translate( "+ margin.left + ","+ margin.top + " ) " );
 
+  //  x
   const happyMin = d3.min( filtered, d => d[ 'HappinessScore' ] );
   const happyMax = d3.max( filtered, d => d[ 'HappinessScore' ] );
   const happyScale = d3.scaleLinear()
                         .domain( [ 1, 10 ] )
                         .range( [ 0, chartWidth ] );
-
+  //  y
   const freeMin = d3.min( filtered, d => d[ 'HumanFreedomScore' ] );
   const freeMax = d3.max( filtered, d => d[ 'HumanFreedomScore' ] );
   const freeScale = d3.scaleLinear()
@@ -43,15 +44,15 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
 
   let bottomAxis = d3.axisBottom( happyScale ).ticks( 10 );
   let element = svg.append( "g" ).attr( "class", "x axis" )
-    .attr( "transform","translate( "+ ( margin.left ) +","+ ( margin.top + chartHeight + 20 ) +" ) " );
+    .attr( "transform","translate( "+ ( margin.left ) +","+ ( margin.top + chartHeight + 10 ) +" ) " );
   bottomAxis( element );
 
   // labels
   // x label
   svg.append( "text" )
       .attr( "class", "time" )
-      .attr( "x", width / 2 )
-      .attr( "y", chartHeight + 60 )
+      .attr( "x", width / 2 + 20)
+      .attr( "y", chartHeight + 50 )
       .attr( "font-size", "14px" )
       .attr( "text-anchor", "middle" )
       .text( "Happiness Score" );
