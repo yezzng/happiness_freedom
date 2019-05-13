@@ -74,7 +74,6 @@ const minMax = [1, 10];
         .style( "opacity", 1 );
 
 
-  
   // mouse on and off for tooltip
   svg.selectAll( "path" ).data( countries.features )
       .enter()
@@ -92,8 +91,8 @@ const minMax = [1, 10];
           var name = d[ 'Country' ];
           div2.style( "opacity", .9 );
           div2.html( "Country: " + name + "<br/>" + "Freedom Score: " + score )
-                  .style("left", ( d3.event.pageX ) + "px" )
-                  .style( "top", ( d3.event.pageY - 28 ) + "px" );
+                  .style("left", ( d3.event.pageX + 9 ) + "px" )
+                  .style( "top", ( d3.event.pageY - 40 ) + "px" );
           })
 //color map
   svg.selectAll( ".country" ).style(  "fill", ( d,i ) => color( score[ i ] )  );

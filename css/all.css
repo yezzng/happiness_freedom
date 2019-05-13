@@ -83,12 +83,16 @@ div.tooltip1 {
   text-align: center;
   width: auto;
   height: auto;
-  padding: 2px;
-  font: 12px sans-serif;
+  padding: 5px;
+  font: 'Avenir Next';
   background: burlywood;
   border: 0px;
   border-radius: 8px;
   pointer-events: none;
+}
+
+#scatterplotGroup {
+  margin: 100px;
 }
 
 svg {
@@ -124,7 +128,7 @@ svg {
 
 #legendText:hover {
   background-color: #224499;
-  color: white; 
+  color: white;
 }
 
 #resetButton {

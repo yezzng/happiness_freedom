@@ -147,29 +147,39 @@ d3.csv("../data/2015happyFreedom.csv").then( function(data) {
       regionText.on( "mouseover", function() {
         regionText.style( "background-color", regionScale( d ) );
         regionText.style( "color", "white" );
-      } );
-      regionText.on( "mouseout", function() {
-        regionText.style( "background-color", "white" );
-        regionText.style( "color", regionScale( d ) );
-      })
+      } )
       .style( "color", regionScale( d ) )
+
       .on( "click", function() {
-          scatter.selectAll( "circle" ).each( function() {
-            let circle = d3.select( this );
-            if ( circle.attr( "region" ) === d ) {
-              circle.attr("opacity", 0.9);
-            }
-            else {
-              circle.attr( "opacity", 0.1 )
-                  //  .on("mouseover", "");
-            }
-        })
         regionText.style( "background-color", regionScale( d ) );
         regionText.style( "color", "white" );
-
+        scatter.selectAll( "circle" ).each( function() {
+          let circle = d3.select( this );
+          if ( circle.attr( "region" ) === d ) {
+            circle.attr("opacity", 0.9);
+          }
+          else {
+            circle.attr( "opacity", 0.1 )
+                //  .on("mouseover", "");
+          }
+        })
       })
-      .append('br');
+      regionText.on( "mouseout", function() {
+       if( !document.getElementById("legendText").clicked === true ){
+          regionText.style( "background-color", "white" );
+          regionText.style( "color", regionScale( d ) );
+       }
+       else if (document.getElementById("legendText").clicked === true){
+         regionText.style( "background-color", regionScale( d ) );
+         regionText.style( "color", "white" );
+       }
+      })
+
   });
+
+  // .on("click",
+  //   regionText.style( "background-color", regionScale( d ) )
+  //             .style( "color", "white" ))
 
   d3.select("#resetButton").on("click", function() {
             scatter.selectAll("circle").attr("opacity", 0.9);
