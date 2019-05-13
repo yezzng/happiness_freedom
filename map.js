@@ -12,6 +12,15 @@ const requestData = async () => {
 
   //loading datasets
   const world = await d3.json("../data/world_110m.json");
+
+  let filterCountry = ['010', '304'];
+  console.log(world);
+
+  world.objects.countries.geometries = world.objects.countries.geometries.filter(d => {
+    return filterCountry.indexOf(d.id.toString().padStart(3, '0')) === -1;
+  });
+
+
   const happy = await d3.csv("../data/2015happyFreedom.csv");
 
   // draw a world map
@@ -27,6 +36,7 @@ const requestData = async () => {
                                     d[ 'HumanFreedomScore' ] !== NaN &&
                                     d[ 'HumanFreedomScore' ] > 0 &&
                                     d[ 'HumanFreedomScore' ].length !== 0 );
+
 
   var score = [];
   filtered.forEach( (d, i) => {
