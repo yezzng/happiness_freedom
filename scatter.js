@@ -19,7 +19,7 @@
 
 
 
-    // console.log(filtered);
+    console.log(filtered);
 
     let svg = d3.select("svg#scatterplot");
     let width = svg.attr("width");
@@ -134,7 +134,15 @@
           let box9 = d3.select("checkbox#box9");
           let box10 = d3.select("checkbox#box10");
 
-
+          // If the data set’s region of the country = user-selected region
+          // AND country freedomRank is 1, 2, or 3, then print the country
+          var userInput = document.getElementById("box1");
+          if ( d["Region"] === userInput &&
+              ( d["HumanFreedomRank"] === 1 ||
+              d["HumanFreedomRank"] === 2 ||
+              d["HumanFreedomRank"] === 3 )) {
+            console.log( d["Country"]);
+          }
 
           // Regions
           regionScale.domain().forEach(function(d,i) {
