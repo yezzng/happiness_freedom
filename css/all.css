@@ -91,6 +91,11 @@ div.tooltip1 {
   pointer-events: none;
 }
 
+svg {
+  display: block;
+  margin: 0 auto;
+}
+
 .row:after {
   content: "";
   display: table;
@@ -102,6 +107,12 @@ div.tooltip1 {
   width: 50%;
   padding: 10px;
 }
+
+/* .column1 {
+  float: right;
+  padding: 10px;
+} */
+
 
 .column a {
   text-align: center;
