@@ -1,37 +1,27 @@
+d3.csv("../data/2015happyFreedom.csv").then( function(data) {
 
+  var filtered = data.filter( d => d[ 'HumanFreedomRank' ] !== NaN &&
+                                    d[ 'HumanFreedomRank' ] > 0 &&
+                                    d[ 'HumanFreedomRank' ].length !== 0 &&
+                                    d[ 'HumanFreedomScore' ] !== NaN &&
+                                    d[ 'HumanFreedomScore' ] > 0 &&
+                                    d[ 'HumanFreedomScore' ].length !== 0);
 
+  filtered.forEach( (d, i) => {
+    d[ 'HumanFreedomScore' ] =  Number( d[ "HumanFreedomScore" ] );
+    d[ 'HumanFreedomRank' ] =  Number( d[ "HumanFreedomRank" ] );
+    d[ 'HappinessRank' ] =  Number( d[ "HappinessRank" ] );
+    d[ 'HappinessScore' ] =  Number( d[ "HappinessScore" ] );
+  });
 
-  d3.csv("../data/2015happyFreedom.csv").then( function(data) {
+  let svg = d3.select( "svg#scatterplot" );
+  let width = svg.attr( "width" );
+  let height = svg.attr( "height" );
+  let margin = { top: 10, right: 10, bottom: 50, left: 50 };
+  let chartWidth = width - margin.left - margin.right;
+  let chartHeight = height - margin.top - margin.bottom;
 
-    var filtered = data.filter(d => d['HumanFreedomRank'] !== NaN &&
-    d['HumanFreedomRank'] > 0 &&
-    d['HumanFreedomRank'].length !== 0 &&
-    d['HumanFreedomScore'] !== NaN &&
-    d['HumanFreedomScore'] > 0 &&
-    d['HumanFreedomScore'].length !== 0);
-
-    filtered.forEach( (d, i) => {
-      d['HumanFreedomScore'] =  Number(d["HumanFreedomScore"])  ;
-      d['HumanFreedomRank'] =  Number(d["HumanFreedomRank"])   ;
-      d['HappinessRank'] =  Number(d["HappinessRank"])   ;
-      d['HappinessScore'] =  Number(d["HappinessScore"])   ;
-    });
-
-
-
-    //console.log(filtered);
-
-    let svg = d3.select("svg#scatterplot");
-    let width = svg.attr("width");
-    let height = svg.attr("height");
-    let margin = { top: 10, right: 10, bottom: 50, left:50};
-    let chartWidth = width - margin.left - margin.right;
-    let chartHeight = height - margin.top - margin.bottom;
-
-
-
-
-    var g= svg.append("g").attr("transform","translate("+ margin.left + ","+ margin.top + ")");
+  var g = svg.append("g").attr("transform","translate("+ margin.left + ","+ margin.top + ")");
 
     const happyMin = d3.min(filtered, d => d['HappinessScore']);
     const happyMax = d3.max(filtered, d => d['HappinessScore']);
