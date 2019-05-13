@@ -67,7 +67,7 @@ svg {
   stroke:  lightgrey ;
 }
 
-div.tooltip {
+div.tooltip1 {
   position: absolute;
   text-align: center;
   width: auto;
@@ -95,9 +95,7 @@ div.tooltip {
 .column a {
   text-align: center;
 }
-
-#scatterplotLegend {
-}
+ 
 
 footer {
   padding: 100px;

@@ -43,12 +43,40 @@ const requestData = async () => {
   .clamp(true)
   .interpolate(d3.interpolateHcl);
 
+  var div2 = d3.select("body").append("div")
+        .attr("class", "tooltip1")
+        .style("opacity", 1);
+
   svg.selectAll("path").data(countries.features)
       .enter()
       .append("path")
       .attr("class", "country")
       .attr("d", path)
-      .style("fill", (d,i) => color(score[i]));
+      .style("fill", (d,i) => color(score[i]))
+      .on("mousemove", function(d,i) {
+
+        count=d.id;
+
+
+                countryf= happy.filter(d => d['Id']==count);
+       //         console.log("contry"+JSON.stringify(countryf));
+                countryf.forEach( (d, i) => {
+                 var score = Number(d['HumanFreedomScore']);
+                var  name=d['Country'];
+               //   id[i]=Number(d['Id']);
+
+                div2
+                  .style("opacity", .9);
+
+                  div2.html("Country: "+name+ "<br/>"+"Freedom Score: "+score)
+                  .style("left", (d3.event.pageX) + "px")
+                  .style("top", (d3.event.pageY - 28) + "px");})
+                  svg.selectAll("path").style("fill", (d,i) => color(score[i]));
+                })
+            .on("mouseout", function(d) {
+                div2.transition()
+                  .duration(50)
+                  .style("opacity", 0);});
 
   //generating counts in order to make a color scale
   let countryCounts = {};
@@ -125,7 +153,6 @@ const requestData = async () => {
 
 
   function mouseOnPlot() {
-
       // Move the tooltip
       const x = ( event.pageX - ( tooltipWidth / 2.0 ) );
       const y = ( event.pageY - tooltipHeight - 20 );
@@ -137,8 +164,8 @@ const requestData = async () => {
 
       // Give tooltip a label
       let country = d3.select( this );
-      tooltip.append( "div" ).attr("class", "tooltip-label" ).text( filtered.Country );
-      tooltip.append( "div" ).attr("class", "tooltip-label" ).text( "Happiness Score: " + filtered.HappinessScore );
+      tooltip.append("div").attr("class", "tooltip-label" ).text( filtered.Country );
+      tooltip.append("div").attr("class", "tooltip-label" ).text( "Happiness Score: " + filtered.HappinessScore );
       tooltip.append("div").attr("class", "tooltip-label").text( "Freedom Score: " + filtered.HumanFreedomScore )
 
       const countryName = country.attr( 'name' );
